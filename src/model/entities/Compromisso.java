@@ -72,4 +72,10 @@ public class Compromisso {
 		this.observacao = observacao;
 	}
 
+	@Override
+	public String toString() {
+		return "Compromisso [dataInicio=" + dataInicio + ", horaInicio=" + horaInicio + ", HoraTermino=" + HoraTermino
+				+ ", descricao=" + descricao + ", local=" + local + ", observacao=" + observacao + "]";
+	}
+
 }

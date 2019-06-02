@@ -1,4 +1,4 @@
-package model.views;
+package gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,13 +12,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class TelaCadastroContatos extends JFrame {
+public class TelaCadastroCompromissos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textOpcao;
 
-	public TelaCadastroContatos() {
+	public TelaCadastroCompromissos() {
+		setTitle("Cadastro de Compromissos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
 		contentPane = new JPanel();
@@ -65,7 +66,7 @@ public class TelaCadastroContatos extends JFrame {
 		lblAgendaPessoal.setBounds(160, 40, 150, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblCadastroDeContatos = new JLabel("CADASTRO DE CONTATOS");
+		JLabel lblCadastroDeContatos = new JLabel("CADASTRO DE COMPROMISSOS");
 		lblCadastroDeContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCadastroDeContatos.setBounds(120, 70, 260, 30);
 		contentPane.add(lblCadastroDeContatos);
@@ -75,6 +76,7 @@ public class TelaCadastroContatos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				switch (textOpcao.getText()) {
+				
 				case "0":
 					
 				TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
@@ -84,10 +86,10 @@ public class TelaCadastroContatos extends JFrame {
 				
 				case "1":
 					
-					TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
-					telaInclusaoContato.setVisible(true);
-					dispose();
-					break;
+				TelaInclusaoCompromisso telaInclusaoCompromisso = new TelaInclusaoCompromisso();
+				telaInclusaoCompromisso.setVisible(true);
+				dispose();
+				break;
 				
 				default:
 					JOptionPane.showMessageDialog(null, "Por favor, insira uma opção válida!");

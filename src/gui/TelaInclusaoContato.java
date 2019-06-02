@@ -1,4 +1,4 @@
-package model.views;
+package gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -25,6 +25,7 @@ public class TelaInclusaoContato extends JFrame {
 	private JTextField textNovaInclusao;
 
 	public TelaInclusaoContato() {
+		setTitle("Inclus\u00E3o de Contato");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
 		contentPane = new JPanel();

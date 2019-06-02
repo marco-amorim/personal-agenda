@@ -1,8 +1,10 @@
-package model.views;
+package gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import model.dao.CompromissoDAO;
+import model.entities.Compromisso;
 
 public class TelaInclusaoCompromisso extends JFrame {
 
@@ -25,6 +30,7 @@ public class TelaInclusaoCompromisso extends JFrame {
 	private JTextField textNovaInclusao;
 
 	public TelaInclusaoCompromisso() {
+		setTitle("Inclus\u00E3o de Compromisso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
 		contentPane = new JPanel();
@@ -135,10 +141,47 @@ public class TelaInclusaoCompromisso extends JFrame {
 					dispose();
 				}
 
+				// Testando esses códigos para implementar as datas no banco de dados!
 				if (textConfirmaInclusao.getText().equalsIgnoreCase("s")) {
 
-					System.out.println("Implementação para o banco!");
+					Compromisso comp = new Compromisso();
+					CompromissoDAO dao = new CompromissoDAO();
 
+					SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
+					SimpleDateFormat sdfHora = new SimpleDateFormat("hh:mm");
+
+					java.util.Date dataInicio;
+					java.util.Date horaInicio;
+					java.util.Date horaTermino;
+					java.sql.Date sqlDataInicio = null;
+					java.sql.Time sqlHoraInicio = null;
+					java.sql.Time sqlHoraTermino = null;
+
+					try {
+						dataInicio = sdfData.parse(textDataInicio.getText());
+						horaInicio = sdfHora.parse(textHoraInicio.getText());
+						horaTermino = sdfHora.parse(textHoraTermino.getText());
+						sqlDataInicio = new java.sql.Date(dataInicio.getTime());
+						sqlHoraInicio = new java.sql.Time(horaInicio.getTime());
+						sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
+					} catch (ParseException dateException) {
+
+						dateException.printStackTrace();
+					}
+
+					comp.setDataInicio(sqlDataInicio);
+					comp.setHoraInicio(sqlHoraInicio);
+					comp.setHoraTermino(sqlHoraTermino);
+					comp.setLocal(textLocal.getText());
+					comp.setDescricao(textDescricao.getText());
+					comp.setObservacao(textObservacao.getText());
+
+					dao.incluiCompromisso(comp);
+					
+					TelaInclusaoCompromisso telaIncComp = new TelaInclusaoCompromisso();
+					dispose();
+					telaIncComp.setVisible(true);
+					
 				} else if (textConfirmaInclusao.getText().equalsIgnoreCase("n")) {
 
 				}

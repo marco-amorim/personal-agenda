@@ -2,7 +2,7 @@ package application;
 
 import java.awt.EventQueue;
 
-import model.views.TelaMenuPrincipal;
+import gui.TelaMenuPrincipal;
 
 public class Principal {
 
