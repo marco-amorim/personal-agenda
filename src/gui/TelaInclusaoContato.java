@@ -3,6 +3,8 @@ package gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import model.dao.ContatoDAO;
+import model.entities.Contato;
 
 public class TelaInclusaoContato extends JFrame {
 
@@ -25,6 +30,7 @@ public class TelaInclusaoContato extends JFrame {
 	private JTextField textNovaInclusao;
 
 	public TelaInclusaoContato() {
+		setResizable(false);
 		setTitle("Inclus\u00E3o de Contato");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
@@ -126,19 +132,41 @@ public class TelaInclusaoContato extends JFrame {
 
 				if (textNovaInclusao.getText().equalsIgnoreCase("s")) {
 
+					dispose();
 					TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
 					telaInclusaoContato.setVisible(true);
-					dispose();
 
 				} else if (textNovaInclusao.getText().equalsIgnoreCase("n")) {
+					dispose();
 					TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
 					telaCadastroContatos.setVisible(true);
-					dispose();
 				}
 
 				if (textConfirmaInclusao.getText().equalsIgnoreCase("s")) {
 
-					System.out.println("Implementação para o banco!");
+					Contato cont = new Contato();
+					ContatoDAO dao = new ContatoDAO();
+
+					SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
+
+					java.util.Date dataNasc;
+					java.sql.Date sqlDataNasc = null;
+
+					try {
+						dataNasc = sdfDataNasc.parse(textDataNasc.getText());
+						sqlDataNasc = new java.sql.Date(dataNasc.getTime());
+					} catch (ParseException e1) {
+
+					}
+
+					cont.setNome(textNome.getText());
+					cont.setLocalTrabalho(textLocalTrab.getText());
+					cont.setTelefone(textTelefone.getText());
+					cont.setEndereco(textEndereco.getText());
+					cont.setObservacao(textObservacao.getText());
+					cont.setDataNasc(sqlDataNasc);
+
+					dao.incluiContato(cont);
 
 				} else if (textConfirmaInclusao.getText().equalsIgnoreCase("n")) {
 

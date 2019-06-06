@@ -30,6 +30,7 @@ public class TelaInclusaoCompromisso extends JFrame {
 	private JTextField textNovaInclusao;
 
 	public TelaInclusaoCompromisso() {
+		setResizable(false);
 		setTitle("Inclus\u00E3o de Compromisso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
@@ -130,18 +131,17 @@ public class TelaInclusaoCompromisso extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (textNovaInclusao.getText().equalsIgnoreCase("s")) {
-
+					dispose();
 					TelaInclusaoCompromisso telaInclusaoCompromisso = new TelaInclusaoCompromisso();
 					telaInclusaoCompromisso.setVisible(true);
-					dispose();
 
 				} else if (textNovaInclusao.getText().equalsIgnoreCase("n")) {
+					dispose();
 					TelaCadastroCompromissos telaCadastroCompromissos = new TelaCadastroCompromissos();
 					telaCadastroCompromissos.setVisible(true);
-					dispose();
+
 				}
 
-				// Testando esses códigos para implementar as datas no banco de dados!
 				if (textConfirmaInclusao.getText().equalsIgnoreCase("s")) {
 
 					Compromisso comp = new Compromisso();
@@ -166,7 +166,6 @@ public class TelaInclusaoCompromisso extends JFrame {
 						sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
 					} catch (ParseException dateException) {
 
-						dateException.printStackTrace();
 					}
 
 					comp.setDataInicio(sqlDataInicio);
@@ -177,11 +176,7 @@ public class TelaInclusaoCompromisso extends JFrame {
 					comp.setObservacao(textObservacao.getText());
 
 					dao.incluiCompromisso(comp);
-					
-					TelaInclusaoCompromisso telaIncComp = new TelaInclusaoCompromisso();
-					dispose();
-					telaIncComp.setVisible(true);
-					
+
 				} else if (textConfirmaInclusao.getText().equalsIgnoreCase("n")) {
 
 				}

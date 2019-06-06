@@ -40,7 +40,10 @@ public class CompromissoDAO {
 					JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+					"Por favor, preencha todos os campos corretamente!" + "\n \n"
+							+ "Inclusão no banco de dados rejeitada!",
+					"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 		} finally {
 			DB.closeStatement(st);
 		}

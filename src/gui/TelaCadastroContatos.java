@@ -19,6 +19,7 @@ public class TelaCadastroContatos extends JFrame {
 	private JTextField textOpcao;
 
 	public TelaCadastroContatos() {
+		setResizable(false);
 		setTitle("Cadastro de Contatos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);

@@ -19,6 +19,7 @@ public class TelaCadastroCompromissos extends JFrame {
 	private JTextField textOpcao;
 
 	public TelaCadastroCompromissos() {
+		setResizable(false);
 		setTitle("Cadastro de Compromissos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
