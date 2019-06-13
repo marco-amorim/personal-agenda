@@ -148,7 +148,7 @@ public class TelaInclusaoCompromisso extends JFrame {
 					CompromissoDAO dao = new CompromissoDAO();
 
 					SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-					SimpleDateFormat sdfHora = new SimpleDateFormat("hh:mm");
+					SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
 
 					java.util.Date dataInicio;
 					java.util.Date horaInicio;
