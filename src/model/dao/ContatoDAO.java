@@ -2,7 +2,9 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -13,6 +15,8 @@ public class ContatoDAO {
 
 	Connection conn = null;
 	PreparedStatement st = null;
+	Statement stmt = null;
+	ResultSet rs = null;
 
 	public void incluiContato(Contato cont) {
 
@@ -44,8 +48,46 @@ public class ContatoDAO {
 					"Por favor, preencha todos os campos corretamente!" + "\n \n"
 							+ "Inclusão no banco de dados rejeitada!",
 					"Campos incorretos", JOptionPane.WARNING_MESSAGE);
-		} finally {
-			DB.closeStatement(st);
+		}
+	}
+
+	public void excluiContato(Contato cont) {
+
+		try {
+			if (conn == null || conn.isClosed()) {
+				conn = DB.getConnection();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+
+			st = conn.prepareStatement("SELECT * FROM contato WHERE nome = ? AND dataNasc = ?");
+			st.setString(1, cont.getNome());
+			st.setDate(2, cont.getDataNasc());
+
+			rs = st.executeQuery();
+
+			if (rs.next() == false) {
+
+				JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
+						JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!", "Cadastro no Banco de Dados",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+
+			st = conn.prepareStatement("DELETE FROM contato WHERE nome = ? AND dataNasc = ?");
+			st.setString(1, cont.getNome());
+			st.setDate(2, cont.getDataNasc());
+			st.executeUpdate();
+
+		} catch (SQLException e1) {
+
+			JOptionPane.showMessageDialog(null,
+					"Por favor, preencha todos os campos corretamente!" + "\n \n"
+							+ "Exclusão no banco de dados rejeitada!",
+					"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 		}
 
 	}

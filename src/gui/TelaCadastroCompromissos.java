@@ -75,27 +75,37 @@ public class TelaCadastroCompromissos extends JFrame {
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				switch (textOpcao.getText()) {
-				
+
 				case "0":
-					
-				TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
-				telaMenuPrincipal.setVisible(true);
-				dispose();
-				break;
-				
+
+					dispose();
+					TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
+					telaMenuPrincipal.setVisible(true);
+
+					break;
+
 				case "1":
-					
-				TelaInclusaoCompromisso telaInclusaoCompromisso = new TelaInclusaoCompromisso();
-				telaInclusaoCompromisso.setVisible(true);
-				dispose();
-				break;
-				
+
+					dispose();
+					TelaInclusaoCompromisso telaInclusaoCompromisso = new TelaInclusaoCompromisso();
+					telaInclusaoCompromisso.setVisible(true);
+
+					break;
+
+				case "4":
+
+					dispose();
+					TelaExclusaoCompromisso telaExclusaoCompromisso = new TelaExclusaoCompromisso();
+					telaExclusaoCompromisso.setVisible(true);
+
+					break;
+
 				default:
 					JOptionPane.showMessageDialog(null, "Por favor, insira uma opção válida!");
 				}
-				
+
 			}
 		});
 		btnNewButton.setBounds(205, 300, 100, 30);

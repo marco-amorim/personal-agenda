@@ -75,26 +75,33 @@ public class TelaCadastroContatos extends JFrame {
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				switch (textOpcao.getText()) {
 				case "0":
-					
-				TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
-				telaMenuPrincipal.setVisible(true);
-				dispose();
-				break;
-				
-				case "1":
-					
-					TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
-					telaInclusaoContato.setVisible(true);
+
+					TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
+					telaMenuPrincipal.setVisible(true);
 					dispose();
 					break;
-				
+
+				case "1":
+
+					dispose();
+					TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
+					telaInclusaoContato.setVisible(true);
+					break;
+
+				case "4":
+
+					dispose();
+					TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
+					telaExclusaoContato.setVisible(true);
+					break;
+
 				default:
 					JOptionPane.showMessageDialog(null, "Por favor, insira uma opção válida!");
 				}
-				
+
 			}
 		});
 		btnNewButton.setBounds(205, 300, 100, 30);
