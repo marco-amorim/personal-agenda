@@ -79,9 +79,9 @@ public class TelaCadastroContatos extends JFrame {
 				switch (textOpcao.getText()) {
 				case "0":
 
+					dispose();
 					TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
 					telaMenuPrincipal.setVisible(true);
-					dispose();
 					break;
 
 				case "1":

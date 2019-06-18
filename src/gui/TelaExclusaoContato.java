@@ -69,11 +69,11 @@ public class TelaExclusaoContato extends JFrame {
 		contentPane.add(textDataNasc);
 		textDataNasc.setColumns(10);
 
-		JLabel lblConfirmaIncluso = new JLabel("CONFIRMA INCLUS\u00C3O ( S/N ) ?");
+		JLabel lblConfirmaIncluso = new JLabel("CONFIRMA EXCLUS\u00C3O ( S/N ) ?");
 		lblConfirmaIncluso.setBounds(60, 320, 200, 20);
 		contentPane.add(lblConfirmaIncluso);
 
-		JLabel lblNewLabel_4 = new JLabel("NOVA INCLUS\u00C3O ( S/N ) ?");
+		JLabel lblNewLabel_4 = new JLabel("NOVA EXCLUS\u00C3O ( S/N ) ?");
 		lblNewLabel_4.setBounds(60, 350, 200, 20);
 		contentPane.add(lblNewLabel_4);
 
