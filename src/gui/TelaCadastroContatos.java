@@ -91,6 +91,13 @@ public class TelaCadastroContatos extends JFrame {
 					telaInclusaoContato.setVisible(true);
 					break;
 
+				case "3":
+
+					dispose();
+					TelaConsultaContato telaConsultaContato = new TelaConsultaContato();
+					telaConsultaContato.setVisible(true);
+					break;
+
 				case "4":
 
 					dispose();

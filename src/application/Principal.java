@@ -2,6 +2,7 @@ package application;
 
 import java.awt.EventQueue;
 
+import db.DB;
 import gui.TelaMenuPrincipal;
 
 public class Principal {
@@ -30,6 +31,7 @@ public class Principal {
 				}
 			}
 		});
+		DB.closeConnection();
 	}
 
 }

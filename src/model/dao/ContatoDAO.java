@@ -92,4 +92,39 @@ public class ContatoDAO {
 
 	}
 
+	public void consultaContato(Contato cont) {
+
+		try {
+			if (conn == null || conn.isClosed()) {
+				conn = DB.getConnection();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			st = conn.prepareStatement("SELECT * FROM contato WHERE nome = ? AND dataNasc = ?");
+			st.setString(1, cont.getNome());
+			st.setDate(2, cont.getDataNasc());
+
+			rs = st.executeQuery();
+
+			if (rs.next()) {
+
+				JOptionPane.showMessageDialog(null,
+						"Nome: " + rs.getString("nome") + "\n" + "Data de Nascimento: " + rs.getDate("dataNasc") + "\n"
+								+ "Local de Trabalho: " + rs.getString("localTrab") + "\n" + "Telefone: "
+								+ rs.getString("telefone") + "\n" + "Endereço: " + rs.getString("endereco") + "\n"
+								+ "Observação: " + rs.getString("observacao"));
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }

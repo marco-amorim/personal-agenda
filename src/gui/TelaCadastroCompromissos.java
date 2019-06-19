@@ -94,6 +94,20 @@ public class TelaCadastroCompromissos extends JFrame {
 
 					break;
 
+				case "2":
+
+					dispose();
+					TelaAlteracaoCompromisso1 tAC1 = new TelaAlteracaoCompromisso1();
+					tAC1.setVisible(true);
+					break;
+
+				case "3":
+
+					dispose();
+					TelaConsultaCompromisso telaConsultaCompromisso = new TelaConsultaCompromisso();
+					telaConsultaCompromisso.setVisible(true);
+
+					break;
 				case "4":
 
 					dispose();
