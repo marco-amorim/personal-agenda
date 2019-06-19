@@ -1,4 +1,4 @@
-package model.dao;
+package dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,13 +10,11 @@ import java.sql.Time;
 import javax.swing.JOptionPane;
 
 import db.DB;
-import model.entities.Compromisso;
+import entities.Compromisso;
 
 public class CompromissoDAO {
 
 	Connection conn = null;
-	PreparedStatement st = null;
-	ResultSet rs = null;
 	Date auxDataInicio;
 	Time auxHoraInicio;
 	Time auxHoraTermino;
@@ -31,6 +29,7 @@ public class CompromissoDAO {
 			e.printStackTrace();
 		}
 		try {
+			PreparedStatement st = null;
 			st = conn.prepareStatement(
 					"INSERT INTO compromisso (dataInicio, horaInicio, horaTermino, local, descricao, observacao)"
 							+ "VALUES(?, ?, ?, ?, ?, ?)");
@@ -46,6 +45,7 @@ public class CompromissoDAO {
 			JOptionPane.showMessageDialog(null, "Inclusão realizada com sucesso!", "Cadastro no Banco de Dados",
 					JOptionPane.INFORMATION_MESSAGE);
 
+			DB.closeStatement(st);
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null,
 					"Por favor, preencha todos os campos corretamente!" + "\n \n"
@@ -65,6 +65,8 @@ public class CompromissoDAO {
 			e.printStackTrace();
 		}
 		try {
+			PreparedStatement st = null;
+			ResultSet rs = null;
 
 			st = conn.prepareStatement(
 					"SELECT * FROM compromisso WHERE dataInicio = ? AND horaInicio = ? AND horaTermino = ?");
@@ -89,6 +91,8 @@ public class CompromissoDAO {
 			st.setTime(3, comp.getHoraTermino());
 			st.executeUpdate();
 
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
 		} catch (SQLException e1) {
 
 			JOptionPane.showMessageDialog(null,
@@ -110,6 +114,10 @@ public class CompromissoDAO {
 		}
 
 		try {
+
+			PreparedStatement st = null;
+			ResultSet rs = null;
+
 			st = conn.prepareStatement(
 					"SELECT * FROM compromisso WHERE dataInicio = ? AND horaInicio = ? AND horaTermino = ?");
 			st.setDate(1, comp.getDataInicio());
@@ -128,6 +136,10 @@ public class CompromissoDAO {
 				JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
+
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -135,7 +147,6 @@ public class CompromissoDAO {
 	}
 
 	public Compromisso consultaAlteracaoCompromisso(Compromisso comp) {
-		boolean existe = false;
 
 		try {
 			if (conn == null || conn.isClosed()) {
@@ -146,6 +157,10 @@ public class CompromissoDAO {
 		}
 
 		try {
+
+			PreparedStatement st = null;
+			ResultSet rs = null;
+
 			st = conn.prepareStatement(
 					"SELECT * FROM compromisso WHERE dataInicio = ? AND horaInicio = ? AND horaTermino = ?");
 
@@ -164,13 +179,15 @@ public class CompromissoDAO {
 								+ "\n" + "Hora Término: " + rs.getTime("horaTermino") + "\n" + "Local: "
 								+ rs.getString("local") + "\n" + "Descrição: " + rs.getString("descricao") + "\n"
 								+ "Observação: " + rs.getString("observacao"));
-				existe = true;
 
 			} else {
 
 				JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
+
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -190,6 +207,9 @@ public class CompromissoDAO {
 		}
 
 		try {
+
+			PreparedStatement st = null;
+
 			st = conn.prepareStatement(
 					"UPDATE compromisso SET dataInicio = ?, horaInicio = ?, horaTermino = ?, local = ?, descricao = ?, observacao = ? WHERE dataInicio = ? AND horaInicio = ? AND horaTermino = ? ");
 			st.setDate(1, comp.getDataInicio());
@@ -202,6 +222,8 @@ public class CompromissoDAO {
 			st.setTime(8, compConsulta.getHoraInicio());
 			st.setTime(9, compConsulta.getHoraTermino());
 			st.execute();
+
+			DB.closeStatement(st);
 		} catch (
 
 		SQLException e) {

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
 
 public class TelaMenuPrincipal extends JFrame {
 
@@ -19,7 +20,7 @@ public class TelaMenuPrincipal extends JFrame {
 	private JTextField textOpcao;
 
 	public TelaMenuPrincipal() {
-		setTitle("Agenda Pessoal");
+		setTitle("Menu Principal");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 470, 417);
@@ -62,13 +63,15 @@ public class TelaMenuPrincipal extends JFrame {
 		textOpcao.setColumns(10);
 
 		JLabel lblXyzComercioDe = new JLabel("XYZ COMERCIO DE PRODUTOS LTDA.");
+		lblXyzComercioDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblXyzComercioDe.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblXyzComercioDe.setBounds(100, 0, 280, 40);
+		lblXyzComercioDe.setBounds(0, 0, 466, 40);
 		contentPane.add(lblXyzComercioDe);
 
 		JLabel lblAgendaPessoal = new JLabel("AGENDA PESSOAL");
+		lblAgendaPessoal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAgendaPessoal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAgendaPessoal.setBounds(160, 40, 150, 30);
+		lblAgendaPessoal.setBounds(0, 40, 466, 30);
 		contentPane.add(lblAgendaPessoal);
 
 		JButton btnNewButton = new JButton("OK");
@@ -103,6 +106,12 @@ public class TelaMenuPrincipal extends JFrame {
 		});
 		btnNewButton.setBounds(205, 300, 100, 30);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_5 = new JLabel("MENU PRINCIPAL");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setBounds(0, 70, 466, 30);
+		contentPane.add(lblNewLabel_5);
 
 	}
 }

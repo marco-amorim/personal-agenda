@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
 
 public class TelaCadastroCompromissos extends JFrame {
 
@@ -58,18 +59,21 @@ public class TelaCadastroCompromissos extends JFrame {
 		textOpcao.setColumns(10);
 
 		JLabel lblXyzComercioDe = new JLabel("XYZ COMERCIO DE PRODUTOS LTDA.");
+		lblXyzComercioDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblXyzComercioDe.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblXyzComercioDe.setBounds(100, 0, 280, 40);
+		lblXyzComercioDe.setBounds(0, 0, 479, 40);
 		contentPane.add(lblXyzComercioDe);
 
 		JLabel lblAgendaPessoal = new JLabel("AGENDA PESSOAL");
+		lblAgendaPessoal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAgendaPessoal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAgendaPessoal.setBounds(160, 40, 150, 30);
+		lblAgendaPessoal.setBounds(0, 40, 479, 30);
 		contentPane.add(lblAgendaPessoal);
 
 		JLabel lblCadastroDeContatos = new JLabel("CADASTRO DE COMPROMISSOS");
+		lblCadastroDeContatos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCadastroDeContatos.setBounds(120, 70, 260, 30);
+		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
 		contentPane.add(lblCadastroDeContatos);
 
 		JButton btnNewButton = new JButton("OK");

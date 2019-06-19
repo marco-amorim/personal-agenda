@@ -3,7 +3,6 @@ package gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -12,10 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import model.dao.CompromissoDAO;
-import model.entities.Compromisso;
+import dao.CompromissoDAO;
+import entities.Compromisso;
 
 public class TelaAlteracaoCompromisso2 extends JFrame {
 
@@ -60,18 +60,21 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 		contentPane.add(lblNewLabel_3);
 
 		JLabel lblXyzComercioDe = new JLabel("XYZ COMERCIO DE PRODUTOS LTDA.");
+		lblXyzComercioDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblXyzComercioDe.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblXyzComercioDe.setBounds(100, 0, 280, 40);
+		lblXyzComercioDe.setBounds(0, 0, 479, 40);
 		contentPane.add(lblXyzComercioDe);
 
 		JLabel lblAgendaPessoal = new JLabel("AGENDA PESSOAL");
+		lblAgendaPessoal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAgendaPessoal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAgendaPessoal.setBounds(160, 40, 150, 30);
+		lblAgendaPessoal.setBounds(0, 40, 479, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblCadastroDeContatos = new JLabel("ALTERA\u00C7\u00C3O DE COMPROMISSO");
+		JLabel lblCadastroDeContatos = new JLabel("INSIRA OS NOVOS DADOS PARA O COMPROMISSO");
+		lblCadastroDeContatos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCadastroDeContatos.setBounds(120, 70, 260, 30);
+		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
 		contentPane.add(lblCadastroDeContatos);
 
 		JLabel lblDataInicio = new JLabel("OBSERVA\u00C7\u00C3O :");
@@ -113,7 +116,7 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 		contentPane.add(lblConfirmaIncluso);
 
 		textConfirmaAlteracao = new JTextField();
-		textConfirmaAlteracao.setBounds(258, 320, 112, 25);
+		textConfirmaAlteracao.setBounds(260, 320, 112, 25);
 		contentPane.add(textConfirmaAlteracao);
 		textConfirmaAlteracao.setColumns(10);
 
@@ -174,7 +177,7 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 				tAC1.setVisible(true);
 			}
 		});
-		btnVoltar.setBounds(380, 360, 87, 28);
+		btnVoltar.setBounds(380, 355, 87, 28);
 		contentPane.add(btnVoltar);
 	}
 }
