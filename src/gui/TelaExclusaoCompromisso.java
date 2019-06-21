@@ -142,9 +142,7 @@ public class TelaExclusaoCompromisso extends JFrame {
 
 					} catch (ParseException dateException) {
 
-						JOptionPane.showMessageDialog(null,
-								"Por favor, preencha todos os campos corretamente!" + "\n \n"
-										+ "Exclusão no banco de dados rejeitada!",
+						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
 								"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 
 					}

@@ -7,17 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class TelaCadastroContatos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textOpcao;
 
 	public TelaCadastroContatos() {
 		setResizable(false);
@@ -28,35 +25,6 @@ public class TelaCadastroContatos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JLabel lblCadastro = new JLabel("1 - INCLUS\u00C3O");
-		lblCadastro.setBounds(60, 140, 200, 20);
-		contentPane.add(lblCadastro);
-
-		JLabel lblNewLabel = new JLabel("2 - ALTERA\u00C7\u00C3O");
-		lblNewLabel.setBounds(60, 160, 200, 20);
-		contentPane.add(lblNewLabel);
-
-		JLabel lblNewLabel_1 = new JLabel("3 - CONSULTA");
-		lblNewLabel_1.setBounds(60, 180, 200, 20);
-		contentPane.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_2 = new JLabel("4 - EXCLUS\u00C3O");
-		lblNewLabel_2.setBounds(60, 200, 200, 20);
-		contentPane.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("0 - RETORNAR");
-		lblNewLabel_3.setBounds(60, 220, 200, 20);
-		contentPane.add(lblNewLabel_3);
-
-		JLabel lblOpo = new JLabel("Op\u00E7\u00E3o:");
-		lblOpo.setBounds(60, 300, 100, 30);
-		contentPane.add(lblOpo);
-
-		textOpcao = new JTextField();
-		textOpcao.setBounds(100, 300, 100, 30);
-		contentPane.add(textOpcao);
-		textOpcao.setColumns(10);
 
 		JLabel lblXyzComercioDe = new JLabel("XYZ COMERCIO DE PRODUTOS LTDA.");
 		lblXyzComercioDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -76,47 +44,57 @@ public class TelaCadastroContatos extends JFrame {
 		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
 		contentPane.add(lblCadastroDeContatos);
 
-		JButton btnNewButton = new JButton("OK");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnNewButton_1 = new JButton("INCLUS\u00C3O");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				switch (textOpcao.getText()) {
-				case "0":
-
-					dispose();
-					TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
-					telaMenuPrincipal.setVisible(true);
-					break;
-
-				case "1":
-
-					dispose();
-					TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
-					telaInclusaoContato.setVisible(true);
-					break;
-
-				case "3":
-
-					dispose();
-					TelaConsultaContato telaConsultaContato = new TelaConsultaContato();
-					telaConsultaContato.setVisible(true);
-					break;
-
-				case "4":
-
-					dispose();
-					TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
-					telaExclusaoContato.setVisible(true);
-					break;
-
-				default:
-					JOptionPane.showMessageDialog(null, "Por favor, insira uma opção válida!");
-				}
-
+				dispose();
+				TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
+				telaInclusaoContato.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(205, 300, 100, 30);
-		contentPane.add(btnNewButton);
+		btnNewButton_1.setBounds(110, 130, 250, 30);
+		contentPane.add(btnNewButton_1);
+
+		JButton btnNewButton_2 = new JButton("ALTERA\u00C7\u00C3O");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_2.setBounds(110, 170, 250, 30);
+		contentPane.add(btnNewButton_2);
+
+		JButton btnNewButton_3 = new JButton("CONSULTA");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaConsultaContato telaConsultaContato = new TelaConsultaContato();
+				telaConsultaContato.setVisible(true);
+			}
+		});
+		btnNewButton_3.setBounds(110, 210, 250, 30);
+		contentPane.add(btnNewButton_3);
+
+		JButton btnNewButton_4 = new JButton("EXCLUS\u00C3O");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
+				telaExclusaoContato.setVisible(true);
+			}
+		});
+		btnNewButton_4.setBounds(110, 250, 250, 30);
+		contentPane.add(btnNewButton_4);
+
+		JButton btnNewButton_5 = new JButton("RETORNAR");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
+				telaMenuPrincipal.setVisible(true);
+			}
+		});
+		btnNewButton_5.setBounds(110, 290, 250, 30);
+		contentPane.add(btnNewButton_5);
 	}
 
 }

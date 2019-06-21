@@ -1,11 +1,9 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 
 import javax.swing.JOptionPane;
 
@@ -15,9 +13,8 @@ import entities.Compromisso;
 public class CompromissoDAO {
 
 	Connection conn = null;
-	Date auxDataInicio;
-	Time auxHoraInicio;
-	Time auxHoraTermino;
+	boolean existeNoBanco = false;
+	boolean alteracaoFeita = false;
 
 	public void incluiCompromisso(Compromisso comp) {
 
@@ -47,9 +44,7 @@ public class CompromissoDAO {
 
 			DB.closeStatement(st);
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null,
-					"Por favor, preencha todos os campos corretamente!" + "\n \n"
-							+ "Inclusão no banco de dados rejeitada!",
+			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
 					"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 		}
 
@@ -95,9 +90,7 @@ public class CompromissoDAO {
 			DB.closeResultSet(rs);
 		} catch (SQLException e1) {
 
-			JOptionPane.showMessageDialog(null,
-					"Por favor, preencha todos os campos corretamente!" + "\n \n"
-							+ "Exclusão no banco de dados rejeitada!",
+			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
 					"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 		}
 
@@ -168,12 +161,11 @@ public class CompromissoDAO {
 			st.setTime(2, comp.getHoraInicio());
 			st.setTime(3, comp.getHoraTermino());
 
-			auxDataInicio = comp.getDataInicio();
-			auxHoraInicio = comp.getHoraInicio();
-			auxHoraTermino = comp.getHoraTermino();
 			rs = st.executeQuery();
 
 			if (rs.next()) {
+
+				existeNoBanco = true;
 				JOptionPane.showMessageDialog(null,
 						"Data inicio: " + rs.getDate("dataInicio") + "\n" + "Hora Inicio: " + rs.getTime("horaInicio")
 								+ "\n" + "Hora Término: " + rs.getTime("horaTermino") + "\n" + "Local: "
@@ -182,8 +174,8 @@ public class CompromissoDAO {
 
 			} else {
 
-				JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
-						JOptionPane.INFORMATION_MESSAGE);
+				existeNoBanco = false;
+
 			}
 
 			DB.closeStatement(st);
@@ -223,12 +215,22 @@ public class CompromissoDAO {
 			st.setTime(9, compConsulta.getHoraTermino());
 			st.execute();
 
-			DB.closeStatement(st);
-		} catch (
+			alteracaoFeita = true;
 
-		SQLException e) {
-			e.printStackTrace();
+			DB.closeStatement(st);
+		} catch (SQLException e) {
+
+			alteracaoFeita = false;
 		}
 
 	}
+
+	public boolean isExisteNoBanco() {
+		return existeNoBanco;
+	}
+
+	public boolean isAlteracaoFeita() {
+		return alteracaoFeita;
+	}
+
 }

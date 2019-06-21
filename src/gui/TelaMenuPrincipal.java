@@ -7,17 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class TelaMenuPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textOpcao;
 
 	public TelaMenuPrincipal() {
 		setTitle("Menu Principal");
@@ -28,39 +25,6 @@ public class TelaMenuPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JLabel lblCadastro = new JLabel("1 - CADASTRO DE CONTATOS");
-		lblCadastro.setBounds(60, 140, 200, 20);
-		contentPane.add(lblCadastro);
-
-		JLabel lblNewLabel = new JLabel("2 - CADASTRO DE COMPROMISSOS");
-		lblNewLabel.setBounds(60, 160, 229, 20);
-		contentPane.add(lblNewLabel);
-
-		JLabel lblNewLabel_1 = new JLabel("3 - COMPROMISSOS DO DIA");
-		lblNewLabel_1.setBounds(60, 180, 200, 20);
-		contentPane.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_2 = new JLabel("4 - LISTA DE CONTATOS");
-		lblNewLabel_2.setBounds(60, 200, 200, 20);
-		contentPane.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("5 - ANIVERSARIANTES DO M\u00CAS");
-		lblNewLabel_3.setBounds(60, 220, 200, 20);
-		contentPane.add(lblNewLabel_3);
-
-		JLabel lblNewLabel_4 = new JLabel("0 - FINALIZAR");
-		lblNewLabel_4.setBounds(60, 240, 200, 20);
-		contentPane.add(lblNewLabel_4);
-
-		JLabel lblOpo = new JLabel("Op\u00E7\u00E3o:");
-		lblOpo.setBounds(60, 300, 100, 30);
-		contentPane.add(lblOpo);
-
-		textOpcao = new JTextField();
-		textOpcao.setBounds(100, 300, 100, 30);
-		contentPane.add(textOpcao);
-		textOpcao.setColumns(10);
 
 		JLabel lblXyzComercioDe = new JLabel("XYZ COMERCIO DE PRODUTOS LTDA.");
 		lblXyzComercioDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -74,44 +38,67 @@ public class TelaMenuPrincipal extends JFrame {
 		lblAgendaPessoal.setBounds(0, 40, 466, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JButton btnNewButton = new JButton("OK");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				switch (textOpcao.getText()) {
-
-				case "1":
-					TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
-					telaCadastroContatos.setVisible(true);
-					dispose();
-					break;
-
-				case "2":
-					TelaCadastroCompromissos telaCadastroCompromissos = new TelaCadastroCompromissos();
-					telaCadastroCompromissos.setVisible(true);
-					dispose();
-					break;
-
-				case "0":
-					dispose();
-					break;
-
-				default:
-					JOptionPane.showMessageDialog(null, "Por favor, insira uma opção válida!");
-					break;
-
-				}
-
-			}
-		});
-		btnNewButton.setBounds(205, 300, 100, 30);
-		contentPane.add(btnNewButton);
-		
 		JLabel lblNewLabel_5 = new JLabel("MENU PRINCIPAL");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setBounds(0, 70, 466, 30);
 		contentPane.add(lblNewLabel_5);
+
+		JButton btnNewButton_1 = new JButton("CADASTRO DE CONTATOS");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
+				telaCadastroContatos.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(110, 130, 250, 30);
+		contentPane.add(btnNewButton_1);
+
+		JButton btnNewButton_2 = new JButton("CADASTRO DE COMPROMISSOS");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroCompromissos telaCadastroCompromissos = new TelaCadastroCompromissos();
+				telaCadastroCompromissos.setVisible(true);
+				dispose();
+
+			}
+		});
+		btnNewButton_2.setBounds(110, 170, 250, 30);
+		contentPane.add(btnNewButton_2);
+
+		JButton btnNewButton_3 = new JButton("COMPROMISSOS DO DIA");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_3.setBounds(110, 210, 250, 30);
+		contentPane.add(btnNewButton_3);
+
+		JButton btnNewButton_4 = new JButton("LISTA DE CONTATOS");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_4.setBounds(110, 250, 250, 30);
+		contentPane.add(btnNewButton_4);
+
+		JButton btnNewButton_5 = new JButton("FINALIZAR");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnNewButton_5.setBounds(110, 330, 250, 30);
+		contentPane.add(btnNewButton_5);
+
+		JButton btnNewButton_6 = new JButton("ANIVERSARIANTES DO M\u00CAS");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_6.setBounds(110, 290, 250, 30);
+		contentPane.add(btnNewButton_6);
 
 	}
 }

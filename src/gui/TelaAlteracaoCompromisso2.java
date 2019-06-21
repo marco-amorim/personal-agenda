@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -158,6 +159,19 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 					comp.setObservacao(textObservacao.getText());
 
 					dao.alteracaoCompromisso(comp, compConsulta);
+
+					if (dao.isAlteracaoFeita() == true) {
+						JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!",
+								"Cadastro no Banco de Dados", JOptionPane.INFORMATION_MESSAGE);
+
+						dispose();
+						TelaAlteracaoCompromisso1 tAC1 = new TelaAlteracaoCompromisso1();
+						tAC1.setVisible(true);
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
+								"Campos incorretos", JOptionPane.WARNING_MESSAGE);
+					}
 
 				} else if (textConfirmaAlteracao.getText().equalsIgnoreCase("n")) {
 

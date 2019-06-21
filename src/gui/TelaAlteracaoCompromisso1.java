@@ -26,7 +26,6 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 	private JTextField textHoraInicio;
 	private JTextField textHoraTermino;
 	private JTextField textConfirmaConsulta;
-	private JTextField textNovaConsulta;
 
 	public TelaAlteracaoCompromisso1() {
 		setResizable(false);
@@ -87,35 +86,14 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 		lblConfirmaIncluso.setBounds(60, 320, 200, 20);
 		contentPane.add(lblConfirmaIncluso);
 
-		JLabel lblNewLabel_4 = new JLabel("NOVA CONSULTA ( S/N ) ?");
-		lblNewLabel_4.setBounds(60, 350, 200, 20);
-		contentPane.add(lblNewLabel_4);
-
 		textConfirmaConsulta = new JTextField();
 		textConfirmaConsulta.setBounds(258, 320, 112, 25);
 		contentPane.add(textConfirmaConsulta);
 		textConfirmaConsulta.setColumns(10);
 
-		textNovaConsulta = new JTextField();
-		textNovaConsulta.setBounds(258, 350, 112, 25);
-		contentPane.add(textNovaConsulta);
-		textNovaConsulta.setColumns(10);
-
 		JButton btnIn = new JButton("OK");
 		btnIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (textNovaConsulta.getText().equalsIgnoreCase("s")) {
-					dispose();
-					TelaConsultaCompromisso telaConsultaCompromisso = new TelaConsultaCompromisso();
-					telaConsultaCompromisso.setVisible(true);
-
-				} else if (textNovaConsulta.getText().equalsIgnoreCase("n")) {
-					dispose();
-					TelaCadastroCompromissos telaCadastroCompromissos = new TelaCadastroCompromissos();
-					telaCadastroCompromissos.setVisible(true);
-
-				}
 
 				if (textConfirmaConsulta.getText().equalsIgnoreCase("s")) {
 
@@ -142,9 +120,7 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 
 					} catch (ParseException dateException) {
 
-						JOptionPane.showMessageDialog(null,
-								"Por favor, preencha todos os campos corretamente!" + "\n \n"
-										+ "Exclusão no banco de dados rejeitada!",
+						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
 								"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 
 					}
@@ -156,11 +132,14 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 					Compromisso compConsulta = new Compromisso();
 					compConsulta = dao.consultaAlteracaoCompromisso(comp);
 
-					if (compConsulta.getDataInicio()!=null) {
+					if (dao.isExisteNoBanco() == true) {
 						dispose();
 						TelaAlteracaoCompromisso2 tAC2 = new TelaAlteracaoCompromisso2(compConsulta);
 						tAC2.setVisible(true);
 
+					} else {
+						JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 
 				} else if (textConfirmaConsulta.getText().equalsIgnoreCase("n")) {
@@ -169,7 +148,20 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 
 			}
 		});
-		btnIn.setBounds(376, 346, 87, 28);
+		btnIn.setBounds(380, 320, 87, 28);
 		contentPane.add(btnIn);
+
+		JButton btnNewButton = new JButton("VOLTAR");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				dispose();
+				TelaCadastroCompromissos tCC = new TelaCadastroCompromissos();
+				tCC.setVisible(true);
+
+			}
+		});
+		btnNewButton.setBounds(380, 360, 87, 28);
+		contentPane.add(btnNewButton);
 	}
 }
