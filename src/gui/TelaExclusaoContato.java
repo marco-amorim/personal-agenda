@@ -24,8 +24,6 @@ public class TelaExclusaoContato extends JFrame {
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textDataNasc;
-	private JTextField textConfirmaExclusao;
-	private JTextField textNovaExclusao;
 
 	public TelaExclusaoContato() {
 		setResizable(false);
@@ -73,71 +71,52 @@ public class TelaExclusaoContato extends JFrame {
 		contentPane.add(textDataNasc);
 		textDataNasc.setColumns(10);
 
-		JLabel lblConfirmaIncluso = new JLabel("CONFIRMA EXCLUS\u00C3O ( S/N ) ?");
-		lblConfirmaIncluso.setBounds(60, 320, 200, 20);
-		contentPane.add(lblConfirmaIncluso);
-
-		JLabel lblNewLabel_4 = new JLabel("NOVA EXCLUS\u00C3O ( S/N ) ?");
-		lblNewLabel_4.setBounds(60, 350, 200, 20);
-		contentPane.add(lblNewLabel_4);
-
-		textConfirmaExclusao = new JTextField();
-		textConfirmaExclusao.setBounds(258, 320, 112, 25);
-		contentPane.add(textConfirmaExclusao);
-		textConfirmaExclusao.setColumns(10);
-
-		textNovaExclusao = new JTextField();
-		textNovaExclusao.setBounds(258, 350, 112, 25);
-		contentPane.add(textNovaExclusao);
-		textNovaExclusao.setColumns(10);
-
 		JButton btnIn = new JButton("OK");
 		btnIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (textNovaExclusao.getText().equalsIgnoreCase("s")) {
+				Contato cont = new Contato();
+				ContatoDAO dao = new ContatoDAO();
 
-					dispose();
-					TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
-					telaExclusaoContato.setVisible(true);
+				SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
 
-				} else if (textNovaExclusao.getText().equalsIgnoreCase("n")) {
-					dispose();
-					TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
-					telaCadastroContatos.setVisible(true);
+				java.util.Date dataNasc;
+				java.sql.Date sqlDataNasc = null;
+
+				try {
+					dataNasc = sdfDataNasc.parse(textDataNasc.getText());
+					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
+				} catch (ParseException e1) {
+
+					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
+							"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 				}
 
-				if (textConfirmaExclusao.getText().equalsIgnoreCase("s")) {
+				cont.setNome(textNome.getText());
+				cont.setDataNasc(sqlDataNasc);
 
-					Contato cont = new Contato();
-					ContatoDAO dao = new ContatoDAO();
+				dao.excluiContato(cont);
 
-					SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
-
-					java.util.Date dataNasc;
-					java.sql.Date sqlDataNasc = null;
-
-					try {
-						dataNasc = sdfDataNasc.parse(textDataNasc.getText());
-						sqlDataNasc = new java.sql.Date(dataNasc.getTime());
-					} catch (ParseException e1) {
-
-						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
-								"Campos incorretos", JOptionPane.WARNING_MESSAGE);
-					}
-
-					cont.setNome(textNome.getText());
-					cont.setDataNasc(sqlDataNasc);
-
-					dao.excluiContato(cont);
-
-				} else if (textConfirmaExclusao.getText().equalsIgnoreCase("n")) {
-
-				}
+				dispose();
+				TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
+				telaExclusaoContato.setVisible(true);
+				telaExclusaoContato.setLocationRelativeTo(null);
 
 			}
 		});
-		btnIn.setBounds(376, 346, 87, 28);
+		btnIn.setBounds(380, 320, 87, 28);
 		contentPane.add(btnIn);
+
+		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
+				telaCadastroContatos.setVisible(true);
+				telaCadastroContatos.setLocationRelativeTo(null);
+			}
+		});
+		btnVoltar.setBounds(380, 355, 87, 28);
+		contentPane.add(btnVoltar);
 	}
 }

@@ -27,8 +27,6 @@ public class TelaInclusaoContato extends JFrame {
 	private JTextField textEndereco;
 	private JTextField textDataNasc;
 	private JTextField textObservacao;
-	private JTextField textConfirmaInclusao;
-	private JTextField textNovaInclusao;
 
 	public TelaInclusaoContato() {
 		setResizable(false);
@@ -112,73 +110,55 @@ public class TelaInclusaoContato extends JFrame {
 		contentPane.add(textObservacao);
 		textObservacao.setColumns(10);
 
-		JLabel lblConfirmaIncluso = new JLabel("CONFIRMA INCLUS\u00C3O ( S/N ) ?");
-		lblConfirmaIncluso.setBounds(60, 320, 200, 20);
-		contentPane.add(lblConfirmaIncluso);
-
-		JLabel lblNewLabel_4 = new JLabel("NOVA INCLUS\u00C3O ( S/N ) ?");
-		lblNewLabel_4.setBounds(60, 350, 200, 20);
-		contentPane.add(lblNewLabel_4);
-
-		textConfirmaInclusao = new JTextField();
-		textConfirmaInclusao.setBounds(258, 320, 112, 25);
-		contentPane.add(textConfirmaInclusao);
-		textConfirmaInclusao.setColumns(10);
-
-		textNovaInclusao = new JTextField();
-		textNovaInclusao.setBounds(258, 350, 112, 25);
-		contentPane.add(textNovaInclusao);
-		textNovaInclusao.setColumns(10);
-
 		JButton btnIn = new JButton("OK");
 		btnIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (textNovaInclusao.getText().equalsIgnoreCase("s")) {
+				Contato cont = new Contato();
+				ContatoDAO dao = new ContatoDAO();
 
-					dispose();
-					TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
-					telaInclusaoContato.setVisible(true);
+				SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
 
-				} else if (textNovaInclusao.getText().equalsIgnoreCase("n")) {
-					dispose();
-					TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
-					telaCadastroContatos.setVisible(true);
-				}
+				java.util.Date dataNasc;
+				java.sql.Date sqlDataNasc = null;
 
-				if (textConfirmaInclusao.getText().equalsIgnoreCase("s")) {
-
-					Contato cont = new Contato();
-					ContatoDAO dao = new ContatoDAO();
-
-					SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
-
-					java.util.Date dataNasc;
-					java.sql.Date sqlDataNasc = null;
-
-					try {
-						dataNasc = sdfDataNasc.parse(textDataNasc.getText());
-						sqlDataNasc = new java.sql.Date(dataNasc.getTime());
-					} catch (ParseException e1) {
-
-					}
-
-					cont.setNome(textNome.getText());
-					cont.setLocalTrabalho(textLocalTrab.getText());
-					cont.setTelefone(textTelefone.getText());
-					cont.setEndereco(textEndereco.getText());
-					cont.setObservacao(textObservacao.getText());
-					cont.setDataNasc(sqlDataNasc);
-
-					dao.incluiContato(cont);
-
-				} else if (textConfirmaInclusao.getText().equalsIgnoreCase("n")) {
+				try {
+					dataNasc = sdfDataNasc.parse(textDataNasc.getText());
+					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
+				} catch (ParseException e1) {
 
 				}
+
+				cont.setNome(textNome.getText());
+				cont.setLocalTrabalho(textLocalTrab.getText());
+				cont.setTelefone(textTelefone.getText());
+				cont.setEndereco(textEndereco.getText());
+				cont.setObservacao(textObservacao.getText());
+				cont.setDataNasc(sqlDataNasc);
+
+				dao.incluiContato(cont);
+
+				dispose();
+				TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
+				telaInclusaoContato.setVisible(true);
+				telaInclusaoContato.setLocationRelativeTo(null);
 
 			}
 		});
-		btnIn.setBounds(376, 346, 87, 28);
+		btnIn.setBounds(380, 320, 87, 28);
 		contentPane.add(btnIn);
+
+		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
+				telaCadastroContatos.setVisible(true);
+				telaCadastroContatos.setLocationRelativeTo(null);
+
+			}
+		});
+		btnVoltar.setBounds(380, 355, 87, 28);
+		contentPane.add(btnVoltar);
 	}
 }

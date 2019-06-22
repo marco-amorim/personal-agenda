@@ -27,8 +27,6 @@ public class TelaInclusaoCompromisso extends JFrame {
 	private JTextField textDescricao;
 	private JTextField textLocal;
 	private JTextField textObservacao;
-	private JTextField textConfirmaInclusao;
-	private JTextField textNovaInclusao;
 
 	public TelaInclusaoCompromisso() {
 		setResizable(false);
@@ -112,82 +110,63 @@ public class TelaInclusaoCompromisso extends JFrame {
 		contentPane.add(textObservacao);
 		textObservacao.setColumns(10);
 
-		JLabel lblConfirmaIncluso = new JLabel("CONFIRMA INCLUS\u00C3O ( S/N ) ?");
-		lblConfirmaIncluso.setBounds(60, 320, 200, 20);
-		contentPane.add(lblConfirmaIncluso);
-
-		JLabel lblNewLabel_4 = new JLabel("NOVA INCLUS\u00C3O ( S/N ) ?");
-		lblNewLabel_4.setBounds(60, 350, 200, 20);
-		contentPane.add(lblNewLabel_4);
-
-		textConfirmaInclusao = new JTextField();
-		textConfirmaInclusao.setBounds(258, 320, 112, 25);
-		contentPane.add(textConfirmaInclusao);
-		textConfirmaInclusao.setColumns(10);
-
-		textNovaInclusao = new JTextField();
-		textNovaInclusao.setBounds(258, 350, 112, 25);
-		contentPane.add(textNovaInclusao);
-		textNovaInclusao.setColumns(10);
-
 		JButton btnIn = new JButton("OK");
 		btnIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (textNovaInclusao.getText().equalsIgnoreCase("s")) {
-					dispose();
-					TelaInclusaoCompromisso telaInclusaoCompromisso = new TelaInclusaoCompromisso();
-					telaInclusaoCompromisso.setVisible(true);
+				Compromisso comp = new Compromisso();
+				CompromissoDAO dao = new CompromissoDAO();
 
-				} else if (textNovaInclusao.getText().equalsIgnoreCase("n")) {
-					dispose();
-					TelaCadastroCompromissos telaCadastroCompromissos = new TelaCadastroCompromissos();
-					telaCadastroCompromissos.setVisible(true);
+				SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
 
-				}
+				java.util.Date dataInicio;
+				java.util.Date horaInicio;
+				java.util.Date horaTermino;
+				java.sql.Date sqlDataInicio = null;
+				java.sql.Time sqlHoraInicio = null;
+				java.sql.Time sqlHoraTermino = null;
 
-				if (textConfirmaInclusao.getText().equalsIgnoreCase("s")) {
-
-					Compromisso comp = new Compromisso();
-					CompromissoDAO dao = new CompromissoDAO();
-
-					SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-					SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
-
-					java.util.Date dataInicio;
-					java.util.Date horaInicio;
-					java.util.Date horaTermino;
-					java.sql.Date sqlDataInicio = null;
-					java.sql.Time sqlHoraInicio = null;
-					java.sql.Time sqlHoraTermino = null;
-
-					try {
-						dataInicio = sdfData.parse(textDataInicio.getText());
-						horaInicio = sdfHora.parse(textHoraInicio.getText());
-						horaTermino = sdfHora.parse(textHoraTermino.getText());
-						sqlDataInicio = new java.sql.Date(dataInicio.getTime());
-						sqlHoraInicio = new java.sql.Time(horaInicio.getTime());
-						sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
-					} catch (ParseException dateException) {
-
-					}
-
-					comp.setDataInicio(sqlDataInicio);
-					comp.setHoraInicio(sqlHoraInicio);
-					comp.setHoraTermino(sqlHoraTermino);
-					comp.setLocal(textLocal.getText());
-					comp.setDescricao(textDescricao.getText());
-					comp.setObservacao(textObservacao.getText());
-
-					dao.incluiCompromisso(comp);
-
-				} else if (textConfirmaInclusao.getText().equalsIgnoreCase("n")) {
+				try {
+					dataInicio = sdfData.parse(textDataInicio.getText());
+					horaInicio = sdfHora.parse(textHoraInicio.getText());
+					horaTermino = sdfHora.parse(textHoraTermino.getText());
+					sqlDataInicio = new java.sql.Date(dataInicio.getTime());
+					sqlHoraInicio = new java.sql.Time(horaInicio.getTime());
+					sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
+				} catch (ParseException dateException) {
 
 				}
+
+				comp.setDataInicio(sqlDataInicio);
+				comp.setHoraInicio(sqlHoraInicio);
+				comp.setHoraTermino(sqlHoraTermino);
+				comp.setLocal(textLocal.getText());
+				comp.setDescricao(textDescricao.getText());
+				comp.setObservacao(textObservacao.getText());
+
+				dao.incluiCompromisso(comp);
+
+				dispose();
+				TelaInclusaoCompromisso telaInclusaoCompromisso = new TelaInclusaoCompromisso();
+				telaInclusaoCompromisso.setVisible(true);
+				telaInclusaoCompromisso.setLocationRelativeTo(null);
 
 			}
 		});
-		btnIn.setBounds(376, 346, 87, 28);
+		btnIn.setBounds(380, 320, 87, 28);
 		contentPane.add(btnIn);
+
+		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaCadastroCompromissos telaCadastroCompromissos = new TelaCadastroCompromissos();
+				telaCadastroCompromissos.setVisible(true);
+				telaCadastroCompromissos.setLocationRelativeTo(null);
+			}
+		});
+		btnVoltar.setBounds(380, 355, 87, 28);
+		contentPane.add(btnVoltar);
 	}
 }

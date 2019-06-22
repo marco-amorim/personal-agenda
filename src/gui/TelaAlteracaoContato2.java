@@ -15,23 +15,23 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import dao.CompromissoDAO;
-import entities.Compromisso;
+import dao.ContatoDAO;
+import entities.Contato;
 
-public class TelaAlteracaoCompromisso2 extends JFrame {
+public class TelaAlteracaoContato2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textDataInicio;
-	private JTextField textHoraInicio;
-	private JTextField textHoraTermino;
-	private JTextField textDescricao;
-	private JTextField textLocal;
+	private JTextField textNome;
+	private JTextField textLocalTrab;
+	private JTextField textTelefone;
+	private JTextField textEndereco;
+	private JTextField textDataNasc;
 	private JTextField textObservacao;
 
-	public TelaAlteracaoCompromisso2(Compromisso compConsulta) {
+	public TelaAlteracaoContato2(Contato contConsulta) {
 		setResizable(false);
-		setTitle("Altera\u00E7\u00E3o de Compromisso");
+		setTitle("Altera\u00E7\u00E3o de Contato");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
 		contentPane = new JPanel();
@@ -39,23 +39,23 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblCadastro = new JLabel("DATA INICIO :");
+		JLabel lblCadastro = new JLabel("NOME :");
 		lblCadastro.setBounds(60, 120, 200, 20);
 		contentPane.add(lblCadastro);
 
-		JLabel lblNewLabel = new JLabel("HORA INICIO :");
+		JLabel lblNewLabel = new JLabel("LOCAL DE TRABALHO :");
 		lblNewLabel.setBounds(60, 150, 200, 20);
 		contentPane.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("HORA T\u00C9RMINO :");
+		JLabel lblNewLabel_1 = new JLabel("TELEFONE :");
 		lblNewLabel_1.setBounds(60, 180, 200, 20);
 		contentPane.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_2 = new JLabel("DESCRI\u00C7\u00C3O :");
+		JLabel lblNewLabel_2 = new JLabel("ENDERE\u00C7O :");
 		lblNewLabel_2.setBounds(60, 210, 200, 20);
 		contentPane.add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("LOCAL :");
+		JLabel lblNewLabel_3 = new JLabel("DATA DE NASCIMENTO :");
 		lblNewLabel_3.setBounds(60, 240, 200, 20);
 		contentPane.add(lblNewLabel_3);
 
@@ -71,7 +71,7 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 		lblAgendaPessoal.setBounds(0, 40, 479, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblCadastroDeContatos = new JLabel("INSIRA OS NOVOS DADOS PARA O COMPROMISSO");
+		JLabel lblCadastroDeContatos = new JLabel("INSIRA OS NOVOS DADOS PARA O CONTATO");
 		lblCadastroDeContatos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
@@ -81,33 +81,33 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 		lblDataInicio.setBounds(60, 270, 200, 20);
 		contentPane.add(lblDataInicio);
 
-		textDataInicio = new JTextField();
-		textDataInicio.setBounds(170, 120, 200, 25);
-		contentPane.add(textDataInicio);
-		textDataInicio.setColumns(10);
+		textNome = new JTextField();
+		textNome.setBounds(210, 120, 200, 25);
+		contentPane.add(textNome);
+		textNome.setColumns(10);
 
-		textHoraInicio = new JTextField();
-		textHoraInicio.setBounds(170, 150, 200, 25);
-		contentPane.add(textHoraInicio);
-		textHoraInicio.setColumns(10);
+		textLocalTrab = new JTextField();
+		textLocalTrab.setBounds(210, 150, 200, 25);
+		contentPane.add(textLocalTrab);
+		textLocalTrab.setColumns(10);
 
-		textHoraTermino = new JTextField();
-		textHoraTermino.setBounds(170, 180, 200, 25);
-		contentPane.add(textHoraTermino);
-		textHoraTermino.setColumns(10);
+		textTelefone = new JTextField();
+		textTelefone.setBounds(210, 180, 200, 25);
+		contentPane.add(textTelefone);
+		textTelefone.setColumns(10);
 
-		textDescricao = new JTextField();
-		textDescricao.setBounds(170, 210, 200, 25);
-		contentPane.add(textDescricao);
-		textDescricao.setColumns(10);
+		textEndereco = new JTextField();
+		textEndereco.setBounds(210, 210, 200, 25);
+		contentPane.add(textEndereco);
+		textEndereco.setColumns(10);
 
-		textLocal = new JTextField();
-		textLocal.setBounds(170, 240, 200, 25);
-		contentPane.add(textLocal);
-		textLocal.setColumns(10);
+		textDataNasc = new JTextField();
+		textDataNasc.setBounds(210, 240, 200, 25);
+		contentPane.add(textDataNasc);
+		textDataNasc.setColumns(10);
 
 		textObservacao = new JTextField();
-		textObservacao.setBounds(170, 270, 200, 25);
+		textObservacao.setBounds(210, 270, 200, 25);
 		contentPane.add(textObservacao);
 		textObservacao.setColumns(10);
 
@@ -115,45 +115,36 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 		btnIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Compromisso comp = new Compromisso();
-				CompromissoDAO dao = new CompromissoDAO();
+				Contato cont = new Contato();
+				ContatoDAO dao = new ContatoDAO();
 
 				SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-				SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
 
-				java.util.Date dataInicio;
-				java.util.Date horaInicio;
-				java.util.Date horaTermino;
-				java.sql.Date sqlDataInicio = null;
-				java.sql.Time sqlHoraInicio = null;
-				java.sql.Time sqlHoraTermino = null;
+				java.util.Date dataNasc;
+				java.sql.Date sqlDataNasc = null;
 
 				try {
-					dataInicio = sdfData.parse(textDataInicio.getText());
-					horaInicio = sdfHora.parse(textHoraInicio.getText());
-					horaTermino = sdfHora.parse(textHoraTermino.getText());
-					sqlDataInicio = new java.sql.Date(dataInicio.getTime());
-					sqlHoraInicio = new java.sql.Time(horaInicio.getTime());
-					sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
+					dataNasc = sdfData.parse(textDataNasc.getText());
+					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
 				} catch (ParseException dateException) {
 
 				}
 
-				comp.setDataInicio(sqlDataInicio);
-				comp.setHoraInicio(sqlHoraInicio);
-				comp.setHoraTermino(sqlHoraTermino);
-				comp.setLocal(textLocal.getText());
-				comp.setDescricao(textDescricao.getText());
-				comp.setObservacao(textObservacao.getText());
+				cont.setNome(textNome.getText());
+				cont.setLocalTrabalho(textLocalTrab.getText());
+				cont.setTelefone(textTelefone.getText());
+				cont.setEndereco(textEndereco.getText());
+				cont.setObservacao(textObservacao.getText());
+				cont.setDataNasc(sqlDataNasc);
 
-				dao.alteracaoCompromisso(comp, compConsulta);
+				dao.alteracaoContato(cont, contConsulta);
 
 				if (dao.isAlteracaoFeita() == true) {
 					JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!",
 							"Cadastro no Banco de Dados", JOptionPane.INFORMATION_MESSAGE);
 
 					dispose();
-					TelaAlteracaoCompromisso1 tAC1 = new TelaAlteracaoCompromisso1();
+					TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
 					tAC1.setVisible(true);
 					tAC1.setLocationRelativeTo(null);
 
@@ -172,7 +163,7 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				dispose();
-				TelaAlteracaoCompromisso1 tAC1 = new TelaAlteracaoCompromisso1();
+				TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
 				tAC1.setVisible(true);
 				tAC1.setLocationRelativeTo(null);
 			}

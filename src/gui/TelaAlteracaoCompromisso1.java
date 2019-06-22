@@ -25,7 +25,6 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 	private JTextField textDataInicio;
 	private JTextField textHoraInicio;
 	private JTextField textHoraTermino;
-	private JTextField textConfirmaConsulta;
 
 	public TelaAlteracaoCompromisso1() {
 		setResizable(false);
@@ -82,68 +81,59 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 		contentPane.add(textHoraTermino);
 		textHoraTermino.setColumns(10);
 
-		JLabel lblConfirmaIncluso = new JLabel("CONFIRMA CONSULTA ( S/N ) ?");
-		lblConfirmaIncluso.setBounds(60, 320, 200, 20);
-		contentPane.add(lblConfirmaIncluso);
-
-		textConfirmaConsulta = new JTextField();
-		textConfirmaConsulta.setBounds(258, 320, 112, 25);
-		contentPane.add(textConfirmaConsulta);
-		textConfirmaConsulta.setColumns(10);
-
 		JButton btnIn = new JButton("OK");
 		btnIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (textConfirmaConsulta.getText().equalsIgnoreCase("s")) {
+				Compromisso comp = new Compromisso();
+				CompromissoDAO dao = new CompromissoDAO();
 
-					Compromisso comp = new Compromisso();
-					CompromissoDAO dao = new CompromissoDAO();
+				SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
 
-					SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-					SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
+				java.util.Date dataInicio;
+				java.util.Date horaInicio;
+				java.util.Date horaTermino;
+				java.sql.Date sqlDataInicio = null;
+				java.sql.Time sqlHoraInicio = null;
+				java.sql.Time sqlHoraTermino = null;
 
-					java.util.Date dataInicio;
-					java.util.Date horaInicio;
-					java.util.Date horaTermino;
-					java.sql.Date sqlDataInicio = null;
-					java.sql.Time sqlHoraInicio = null;
-					java.sql.Time sqlHoraTermino = null;
+				try {
+					dataInicio = sdfData.parse(textDataInicio.getText());
+					horaInicio = sdfHora.parse(textHoraInicio.getText());
+					horaTermino = sdfHora.parse(textHoraTermino.getText());
+					sqlDataInicio = new java.sql.Date(dataInicio.getTime());
+					sqlHoraInicio = new java.sql.Time(horaInicio.getTime());
+					sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
 
-					try {
-						dataInicio = sdfData.parse(textDataInicio.getText());
-						horaInicio = sdfHora.parse(textHoraInicio.getText());
-						horaTermino = sdfHora.parse(textHoraTermino.getText());
-						sqlDataInicio = new java.sql.Date(dataInicio.getTime());
-						sqlHoraInicio = new java.sql.Time(horaInicio.getTime());
-						sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
+				} catch (ParseException dateException) {
 
-					} catch (ParseException dateException) {
+					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
+							"Campos incorretos", JOptionPane.WARNING_MESSAGE);
 
-						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
-								"Campos incorretos", JOptionPane.WARNING_MESSAGE);
+				}
 
-					}
+				comp.setDataInicio(sqlDataInicio);
+				comp.setHoraInicio(sqlHoraInicio);
+				comp.setHoraTermino(sqlHoraTermino);
 
-					comp.setDataInicio(sqlDataInicio);
-					comp.setHoraInicio(sqlHoraInicio);
-					comp.setHoraTermino(sqlHoraTermino);
+				Compromisso compConsulta = new Compromisso();
+				compConsulta = dao.consultaAlteracaoCompromisso(comp);
 
-					Compromisso compConsulta = new Compromisso();
-					compConsulta = dao.consultaAlteracaoCompromisso(comp);
+				if (dao.isExisteNoBanco() == true) {
+					dispose();
+					TelaAlteracaoCompromisso2 tAC2 = new TelaAlteracaoCompromisso2(compConsulta);
+					tAC2.setVisible(true);
+					tAC2.setLocationRelativeTo(null);
 
-					if (dao.isExisteNoBanco() == true) {
-						dispose();
-						TelaAlteracaoCompromisso2 tAC2 = new TelaAlteracaoCompromisso2(compConsulta);
-						tAC2.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
+							JOptionPane.INFORMATION_MESSAGE);
 
-					} else {
-						JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
-
-				} else if (textConfirmaConsulta.getText().equalsIgnoreCase("n")) {
-
+					dispose();
+					TelaAlteracaoCompromisso1 tAC1 = new TelaAlteracaoCompromisso1();
+					tAC1.setVisible(true);
+					tAC1.setLocationRelativeTo(null);
 				}
 
 			}
@@ -158,10 +148,11 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 				dispose();
 				TelaCadastroCompromissos tCC = new TelaCadastroCompromissos();
 				tCC.setVisible(true);
+				tCC.setLocationRelativeTo(null);
 
 			}
 		});
-		btnNewButton.setBounds(380, 360, 87, 28);
+		btnNewButton.setBounds(380, 355, 87, 28);
 		contentPane.add(btnNewButton);
 	}
 }

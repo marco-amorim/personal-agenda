@@ -49,6 +49,7 @@ public class TelaMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
 				telaCadastroContatos.setVisible(true);
+				telaCadastroContatos.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
@@ -60,6 +61,7 @@ public class TelaMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaCadastroCompromissos telaCadastroCompromissos = new TelaCadastroCompromissos();
 				telaCadastroCompromissos.setVisible(true);
+				telaCadastroCompromissos.setLocationRelativeTo(null);
 				dispose();
 
 			}

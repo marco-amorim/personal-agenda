@@ -12,22 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import dao.ContatoDAO;
 import entities.Contato;
-import javax.swing.SwingConstants;
 
-public class TelaConsultaContato extends JFrame {
+public class TelaAlteracaoContato1 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textDataNasc;
 
-	public TelaConsultaContato() {
+	public TelaAlteracaoContato1() {
 		setResizable(false);
-		setTitle("Consulta de Contato");
+		setTitle("Altera\u00E7\u00E3o de Contato");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
 		contentPane = new JPanel();
@@ -55,7 +55,7 @@ public class TelaConsultaContato extends JFrame {
 		lblAgendaPessoal.setBounds(0, 40, 479, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblCadastroDeContatos = new JLabel("CONSULTA DE CONTATO");
+		JLabel lblCadastroDeContatos = new JLabel("INFORME OS DADOS DO CONTATO");
 		lblCadastroDeContatos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
@@ -78,29 +78,42 @@ public class TelaConsultaContato extends JFrame {
 				Contato cont = new Contato();
 				ContatoDAO dao = new ContatoDAO();
 
-				SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
 
 				java.util.Date dataNasc;
 				java.sql.Date sqlDataNasc = null;
 
 				try {
-					dataNasc = sdfDataNasc.parse(textDataNasc.getText());
+					dataNasc = sdfData.parse(textDataNasc.getText());
 					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
-				} catch (ParseException e1) {
+				} catch (ParseException dateException) {
 
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
 							"Campos incorretos", JOptionPane.WARNING_MESSAGE);
+
 				}
 
 				cont.setNome(textNome.getText());
 				cont.setDataNasc(sqlDataNasc);
 
-				dao.consultaContato(cont);
+				Contato contConsulta = new Contato();
+				contConsulta = dao.consultaAlteracaoContato(cont);
 
-				dispose();
-				TelaConsultaContato telaConsultaContato = new TelaConsultaContato();
-				telaConsultaContato.setVisible(true);
-				telaConsultaContato.setLocationRelativeTo(null);
+				if (dao.isExisteNoBanco() == true) {
+					dispose();
+					TelaAlteracaoContato2 tAC2 = new TelaAlteracaoContato2(contConsulta);
+					tAC2.setVisible(true);
+					tAC2.setLocationRelativeTo(null);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
+							JOptionPane.INFORMATION_MESSAGE);
+
+					dispose();
+					TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
+					tAC1.setVisible(true);
+					tAC1.setLocationRelativeTo(null);
+				}
 
 			}
 		});

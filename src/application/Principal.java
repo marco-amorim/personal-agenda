@@ -26,6 +26,7 @@ public class Principal {
 				try {
 					TelaMenuPrincipal frame = new TelaMenuPrincipal();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

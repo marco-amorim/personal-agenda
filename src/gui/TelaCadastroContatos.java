@@ -50,6 +50,7 @@ public class TelaCadastroContatos extends JFrame {
 				dispose();
 				TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
 				telaInclusaoContato.setVisible(true);
+				telaInclusaoContato.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_1.setBounds(110, 130, 250, 30);
@@ -58,6 +59,10 @@ public class TelaCadastroContatos extends JFrame {
 		JButton btnNewButton_2 = new JButton("ALTERA\u00C7\u00C3O");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
+				tAC1.setVisible(true);
+				tAC1.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_2.setBounds(110, 170, 250, 30);
@@ -69,6 +74,7 @@ public class TelaCadastroContatos extends JFrame {
 				dispose();
 				TelaConsultaContato telaConsultaContato = new TelaConsultaContato();
 				telaConsultaContato.setVisible(true);
+				telaConsultaContato.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_3.setBounds(110, 210, 250, 30);
@@ -80,6 +86,7 @@ public class TelaCadastroContatos extends JFrame {
 				dispose();
 				TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
 				telaExclusaoContato.setVisible(true);
+				telaExclusaoContato.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_4.setBounds(110, 250, 250, 30);
@@ -91,6 +98,7 @@ public class TelaCadastroContatos extends JFrame {
 				dispose();
 				TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
 				telaMenuPrincipal.setVisible(true);
+				telaMenuPrincipal.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_5.setBounds(110, 290, 250, 30);

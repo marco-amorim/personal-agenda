@@ -50,6 +50,7 @@ public class TelaCadastroCompromissos extends JFrame {
 				dispose();
 				TelaInclusaoCompromisso telaInclusaoCompromisso = new TelaInclusaoCompromisso();
 				telaInclusaoCompromisso.setVisible(true);
+				telaInclusaoCompromisso.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_1.setBounds(110, 130, 250, 30);
@@ -61,6 +62,7 @@ public class TelaCadastroCompromissos extends JFrame {
 				dispose();
 				TelaAlteracaoCompromisso1 tAC1 = new TelaAlteracaoCompromisso1();
 				tAC1.setVisible(true);
+				tAC1.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_2.setBounds(110, 170, 250, 30);
@@ -72,6 +74,7 @@ public class TelaCadastroCompromissos extends JFrame {
 				dispose();
 				TelaConsultaCompromisso telaConsultaCompromisso = new TelaConsultaCompromisso();
 				telaConsultaCompromisso.setVisible(true);
+				telaConsultaCompromisso.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_3.setBounds(110, 210, 250, 30);
@@ -83,6 +86,7 @@ public class TelaCadastroCompromissos extends JFrame {
 				dispose();
 				TelaExclusaoCompromisso telaExclusaoCompromisso = new TelaExclusaoCompromisso();
 				telaExclusaoCompromisso.setVisible(true);
+				telaExclusaoCompromisso.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_4.setBounds(110, 250, 250, 30);
@@ -94,6 +98,7 @@ public class TelaCadastroCompromissos extends JFrame {
 				dispose();
 				TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
 				telaMenuPrincipal.setVisible(true);
+				telaMenuPrincipal.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_5.setBounds(110, 290, 250, 30);
