@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,11 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.CompromissoDAO;
-import entities.Compromisso;
+import model.dao.CompromissoDAO;
+import model.entities.Compromisso;
+
 import javax.swing.SwingConstants;
 
-public class TelaConsultaCompromisso extends JFrame {
+public class TelaExclusaoCompromisso extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -26,9 +27,9 @@ public class TelaConsultaCompromisso extends JFrame {
 	private JTextField textHoraInicio;
 	private JTextField textHoraTermino;
 
-	public TelaConsultaCompromisso() {
+	public TelaExclusaoCompromisso() {
 		setResizable(false);
-		setTitle("Consulta de Compromisso");
+		setTitle("Exclus\u00E3o de Compromisso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
 		contentPane = new JPanel();
@@ -60,7 +61,7 @@ public class TelaConsultaCompromisso extends JFrame {
 		lblAgendaPessoal.setBounds(0, 40, 479, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblCadastroDeContatos = new JLabel("CONSULTA DE COMPROMISSO");
+		JLabel lblCadastroDeContatos = new JLabel("EXCLUS\u00C3O DE COMPROMISSO");
 		lblCadastroDeContatos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
@@ -117,13 +118,12 @@ public class TelaConsultaCompromisso extends JFrame {
 				comp.setHoraInicio(sqlHoraInicio);
 				comp.setHoraTermino(sqlHoraTermino);
 
-				dao.consultaCompromisso(comp);
+				dao.excluiCompromisso(comp);
 
 				dispose();
-				TelaConsultaCompromisso telaConsultaCompromisso = new TelaConsultaCompromisso();
-				telaConsultaCompromisso.setVisible(true);
-				telaConsultaCompromisso.setLocationRelativeTo(null);
-
+				TelaExclusaoCompromisso telaExclusaoCompromisso = new TelaExclusaoCompromisso();
+				telaExclusaoCompromisso.setVisible(true);
+				telaExclusaoCompromisso.setLocationRelativeTo(null);
 			}
 		});
 		btnIn.setBounds(380, 320, 87, 28);

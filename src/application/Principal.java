@@ -2,8 +2,8 @@ package application;
 
 import java.awt.EventQueue;
 
-import db.DB;
-import gui.TelaMenuPrincipal;
+import model.db.DB;
+import view.TelaMenuPrincipal;
 
 public class Principal {
 

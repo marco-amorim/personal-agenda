@@ -1,4 +1,4 @@
-package dao;
+package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import db.DB;
-import entities.Compromisso;
+import model.db.DB;
+import model.entities.Compromisso;
 
 public class CompromissoDAO {
 

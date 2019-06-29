@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,20 +14,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dao.ContatoDAO;
-import entities.Contato;
+import model.dao.ContatoDAO;
+import model.entities.Contato;
+
 import javax.swing.SwingConstants;
 
-public class TelaExclusaoContato extends JFrame {
+public class TelaConsultaContato extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textDataNasc;
 
-	public TelaExclusaoContato() {
+	public TelaConsultaContato() {
 		setResizable(false);
-		setTitle("Exclus\u00E3o de Contato");
+		setTitle("Consulta de Contato");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 483, 428);
 		contentPane = new JPanel();
@@ -39,9 +40,9 @@ public class TelaExclusaoContato extends JFrame {
 		lblCadastro.setBounds(60, 180, 200, 20);
 		contentPane.add(lblCadastro);
 
-		JLabel lblNewLabel_3 = new JLabel("DATA DE NASCIMENTO :");
-		lblNewLabel_3.setBounds(60, 220, 200, 20);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblNewLabel = new JLabel("DATA DE NASCIMENTO :");
+		lblNewLabel.setBounds(60, 220, 200, 20);
+		contentPane.add(lblNewLabel);
 
 		JLabel lblXyzComercioDe = new JLabel("XYZ COMERCIO DE PRODUTOS LTDA.");
 		lblXyzComercioDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,7 +56,7 @@ public class TelaExclusaoContato extends JFrame {
 		lblAgendaPessoal.setBounds(0, 40, 479, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblCadastroDeContatos = new JLabel("EXCLUS\u00C3O DE CONTATO");
+		JLabel lblCadastroDeContatos = new JLabel("CONSULTA DE CONTATO");
 		lblCadastroDeContatos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
@@ -95,12 +96,12 @@ public class TelaExclusaoContato extends JFrame {
 				cont.setNome(textNome.getText());
 				cont.setDataNasc(sqlDataNasc);
 
-				dao.excluiContato(cont);
+				dao.consultaContato(cont);
 
 				dispose();
-				TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
-				telaExclusaoContato.setVisible(true);
-				telaExclusaoContato.setLocationRelativeTo(null);
+				TelaConsultaContato telaConsultaContato = new TelaConsultaContato();
+				telaConsultaContato.setVisible(true);
+				telaConsultaContato.setLocationRelativeTo(null);
 
 			}
 		});

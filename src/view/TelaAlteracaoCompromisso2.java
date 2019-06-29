@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,8 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import dao.CompromissoDAO;
-import entities.Compromisso;
+import model.dao.CompromissoDAO;
+import model.entities.Compromisso;
 
 public class TelaAlteracaoCompromisso2 extends JFrame {
 
