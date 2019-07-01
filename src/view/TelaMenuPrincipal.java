@@ -74,10 +74,6 @@ public class TelaMenuPrincipal extends JFrame {
 
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public JPanel getContentPane() {
 		return contentPane;
 	}

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -16,9 +15,6 @@ import model.entities.Contato;
 public class ContatoDAO {
 
 	Connection conn = null;
-	PreparedStatement st = null;
-	Statement stmt = null;
-	ResultSet rs = null;
 	boolean existeNoBanco = false;
 	boolean alteracaoFeita = false;
 	Contato cont;
@@ -34,6 +30,7 @@ public class ContatoDAO {
 			e1.printStackTrace();
 		}
 		try {
+			PreparedStatement st = null;
 			st = conn.prepareStatement("INSERT INTO contato (nome, localtrab, telefone, endereco, observacao, datanasc)"
 					+ "VALUES(?, ?, ?, ?, ?, ?)");
 
@@ -48,6 +45,8 @@ public class ContatoDAO {
 
 			JOptionPane.showMessageDialog(null, "Inclusão realizada com sucesso!", "Cadastro no Banco de Dados",
 					JOptionPane.INFORMATION_MESSAGE);
+
+			DB.closeStatement(st);
 
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
@@ -65,7 +64,8 @@ public class ContatoDAO {
 			e.printStackTrace();
 		}
 		try {
-
+			PreparedStatement st = null;
+			ResultSet rs = null;
 			st = conn.prepareStatement("SELECT * FROM contato WHERE nome = ? AND dataNasc = ?");
 			st.setString(1, cont.getNome());
 			st.setDate(2, cont.getDataNasc());
@@ -86,6 +86,9 @@ public class ContatoDAO {
 			st.setDate(2, cont.getDataNasc());
 			st.executeUpdate();
 
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+
 		} catch (SQLException e1) {
 
 			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
@@ -105,6 +108,8 @@ public class ContatoDAO {
 		}
 
 		try {
+			PreparedStatement st = null;
+			ResultSet rs = null;
 			st = conn.prepareStatement("SELECT * FROM contato WHERE nome = ? AND dataNasc = ?");
 			st.setString(1, cont.getNome());
 			st.setDate(2, cont.getDataNasc());
@@ -123,6 +128,9 @@ public class ContatoDAO {
 				JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -205,6 +213,7 @@ public class ContatoDAO {
 			alteracaoFeita = true;
 
 			DB.closeStatement(st);
+
 		} catch (SQLException e) {
 
 			alteracaoFeita = false;
@@ -233,6 +242,8 @@ public class ContatoDAO {
 						rs.getString("observacao"), rs.getString("telefone"), rs.getDate("dataNasc"));
 				listaContatos.add(cont);
 			}
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
 
 		} catch (SQLException e) {
 
@@ -274,6 +285,8 @@ public class ContatoDAO {
 						rs.getString("observacao"), rs.getString("telefone"), rs.getDate("dataNasc"));
 				listaContatos.add(cont);
 			}
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
 
 		} catch (SQLException e) {
 
