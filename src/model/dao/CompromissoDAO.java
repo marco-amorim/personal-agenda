@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import model.db.DB;
 import model.entities.Compromisso;
@@ -15,6 +17,8 @@ public class CompromissoDAO {
 	Connection conn = null;
 	boolean existeNoBanco = false;
 	boolean alteracaoFeita = false;
+	Compromisso comp;
+	ArrayList<Compromisso> listaCompromissos = new ArrayList<>();
 
 	public void incluiCompromisso(Compromisso comp) {
 
@@ -223,6 +227,49 @@ public class CompromissoDAO {
 			alteracaoFeita = false;
 		}
 
+	}
+
+	public void preencherListaCompromissos() {
+
+		try {
+			if (conn == null || conn.isClosed()) {
+				conn = DB.getConnection();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			PreparedStatement st = null;
+			ResultSet rs = null;
+			st = conn.prepareStatement("SELECT * FROM compromisso WHERE dataInicio = CURDATE();");
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				comp = new Compromisso(rs.getDate("dataInicio"), rs.getTime("horaInicio"), rs.getTime("horaTermino"),
+						rs.getString("descricao"), rs.getString("local"), rs.getString("observacao"));
+
+				listaCompromissos.add(comp);
+			}
+
+		} catch (SQLException e) {
+
+		}
+	}
+
+	public void preencherTabelaListaCompromissos(DefaultTableModel model) {
+
+		Object[] row = new Object[6];
+		for (int i = 0; i < listaCompromissos.size(); i++) {
+			row[0] = listaCompromissos.get(i).getDataInicio();
+			row[1] = listaCompromissos.get(i).getHoraInicio();
+			row[2] = listaCompromissos.get(i).getHoraTermino();
+			row[3] = listaCompromissos.get(i).getLocal();
+			row[4] = listaCompromissos.get(i).getDescricao();
+			row[5] = listaCompromissos.get(i).getObservacao();
+
+			model.addRow(row);
+		}
 	}
 
 	public boolean isExisteNoBanco() {

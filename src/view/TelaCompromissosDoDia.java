@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaListaContatos extends JFrame {
+public class TelaCompromissosDoDia extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -22,8 +22,8 @@ public class TelaListaContatos extends JFrame {
 	Object[] row = new Object[6];
 	DefaultTableModel model;
 
-	public TelaListaContatos() {
-		setTitle("Lista de Contatos");
+	public TelaCompromissosDoDia() {
+		setTitle("Compromissos do Dia");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 428);
@@ -44,7 +44,7 @@ public class TelaListaContatos extends JFrame {
 		lblAgendaPessoal.setBounds(0, 40, 846, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblNewLabel_5 = new JLabel("LISTA DE CONTATOS");
+		JLabel lblNewLabel_5 = new JLabel("COMPROMISSOS DO DIA");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setBounds(0, 70, 846, 30);
@@ -69,7 +69,7 @@ public class TelaListaContatos extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		model = new DefaultTableModel();
-		Object[] columns = { "Nome", "Local de Trabalho", "Telefone", "Endereço", "Observação", "Data de Nascimento" };
+		Object[] columns = { "Data de Início", "Hora de Início", "Hora de Término", "Local", "Descrição", "Observação" };
 		table.setModel(model);
 		table.setRowHeight(30);
 		model.setColumnIdentifiers(columns);

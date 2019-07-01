@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import model.dao.CompromissoDAO;
+import model.dao.ContatoDAO;
+
 public class TelaMenuPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -51,7 +54,7 @@ public class TelaMenuPrincipal extends JFrame {
 				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
 				telaCadastroContatos.setVisible(true);
 				telaCadastroContatos.setLocationRelativeTo(null);
-				
+
 			}
 		});
 		btnNewButton_1.setBounds(110, 130, 250, 30);
@@ -73,6 +76,14 @@ public class TelaMenuPrincipal extends JFrame {
 		JButton btnNewButton_3 = new JButton("COMPROMISSOS DO DIA");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaCompromissosDoDia tcd = new TelaCompromissosDoDia();
+				CompromissoDAO dao = new CompromissoDAO();
+				tcd.setVisible(true);
+				tcd.setLocationRelativeTo(null);
+				dao.preencherListaCompromissos();
+				dao.preencherTabelaListaCompromissos(tcd.getModel());
+
 			}
 		});
 		btnNewButton_3.setBounds(110, 210, 250, 30);
@@ -83,8 +94,11 @@ public class TelaMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				TelaListaContatos tlc = new TelaListaContatos();
+				ContatoDAO dao = new ContatoDAO();
 				tlc.setVisible(true);
 				tlc.setLocationRelativeTo(null);
+				dao.preencherListaContatos();
+				dao.preencherTabelaListaContatos(tlc.getModel());
 
 			}
 		});
@@ -103,10 +117,18 @@ public class TelaMenuPrincipal extends JFrame {
 		JButton btnNewButton_6 = new JButton("ANIVERSARIANTES DO M\u00CAS");
 		btnNewButton_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaAniversariantesDoMes tam = new TelaAniversariantesDoMes();
+				ContatoDAO dao = new ContatoDAO();
+				tam.setVisible(true);
+				tam.setLocationRelativeTo(null);
+				dao.preencherListaAniversariantes();
+				dao.preencherTabelaListaContatos(tam.getModel());
 			}
 		});
 		btnNewButton_6.setBounds(110, 290, 250, 30);
 		contentPane.add(btnNewButton_6);
 
 	}
+
 }

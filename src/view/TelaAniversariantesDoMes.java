@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaListaContatos extends JFrame {
+public class TelaAniversariantesDoMes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -22,8 +22,8 @@ public class TelaListaContatos extends JFrame {
 	Object[] row = new Object[6];
 	DefaultTableModel model;
 
-	public TelaListaContatos() {
-		setTitle("Lista de Contatos");
+	public TelaAniversariantesDoMes() {
+		setTitle("Aniversariantes do M\u00EAs");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 428);
@@ -44,7 +44,7 @@ public class TelaListaContatos extends JFrame {
 		lblAgendaPessoal.setBounds(0, 40, 846, 30);
 		contentPane.add(lblAgendaPessoal);
 
-		JLabel lblNewLabel_5 = new JLabel("LISTA DE CONTATOS");
+		JLabel lblNewLabel_5 = new JLabel("ANIVERSARIANTES DO M\u00CAS");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setBounds(0, 70, 846, 30);

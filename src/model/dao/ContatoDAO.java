@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import model.db.DB;
 import model.entities.Contato;
@@ -19,6 +21,8 @@ public class ContatoDAO {
 	ResultSet rs = null;
 	boolean existeNoBanco = false;
 	boolean alteracaoFeita = false;
+	Contato cont;
+	ArrayList<Contato> listaContatos = new ArrayList<>();
 
 	public void incluiContato(Contato cont) {
 
@@ -206,6 +210,74 @@ public class ContatoDAO {
 			alteracaoFeita = false;
 		}
 
+	}
+
+	public void preencherListaContatos() {
+
+		try {
+			if (conn == null || conn.isClosed()) {
+				conn = DB.getConnection();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			PreparedStatement st = null;
+			ResultSet rs = null;
+			st = conn.prepareStatement("SELECT * FROM contato");
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				cont = new Contato(rs.getString("nome"), rs.getString("localTrab"), rs.getString("endereco"),
+						rs.getString("observacao"), rs.getString("telefone"), rs.getDate("dataNasc"));
+				listaContatos.add(cont);
+			}
+
+		} catch (SQLException e) {
+
+		}
+	}
+
+	public void preencherTabelaListaContatos(DefaultTableModel model) {
+
+		Object[] row = new Object[6];
+		for (int i = 0; i < listaContatos.size(); i++) {
+			row[0] = listaContatos.get(i).getNome();
+			row[1] = listaContatos.get(i).getLocalTrabalho();
+			row[2] = listaContatos.get(i).getTelefone();
+			row[3] = listaContatos.get(i).getEndereco();
+			row[4] = listaContatos.get(i).getObservacao();
+			row[5] = listaContatos.get(i).getDataNasc();
+			model.addRow(row);
+		}
+	}
+
+	public void preencherListaAniversariantes() {
+
+		try {
+			if (conn == null || conn.isClosed()) {
+				conn = DB.getConnection();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			PreparedStatement st = null;
+			ResultSet rs = null;
+			st = conn.prepareStatement("SELECT * FROM contato WHERE MONTH(dataNasc) = MONTH(CURRENT_DATE());");
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				cont = new Contato(rs.getString("nome"), rs.getString("localTrab"), rs.getString("endereco"),
+						rs.getString("observacao"), rs.getString("telefone"), rs.getDate("dataNasc"));
+				listaContatos.add(cont);
+			}
+
+		} catch (SQLException e) {
+
+		}
 	}
 
 	public boolean isExisteNoBanco() {
