@@ -1,21 +1,15 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import model.dao.ContatoDAO;
 import model.entities.Contato;
 
 public class TelaAlteracaoContato2 extends JFrame {
@@ -28,6 +22,8 @@ public class TelaAlteracaoContato2 extends JFrame {
 	private JTextField textEndereco;
 	private JTextField textDataNasc;
 	private JTextField textObservacao;
+	private JButton btnOk;
+	private JButton btnVoltar;
 
 	public TelaAlteracaoContato2(Contato contConsulta) {
 		setResizable(false);
@@ -111,64 +107,45 @@ public class TelaAlteracaoContato2 extends JFrame {
 		contentPane.add(textObservacao);
 		textObservacao.setColumns(10);
 
-		JButton btnIn = new JButton("OK");
-		btnIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnOk = new JButton("OK");
+		btnOk.setBounds(380, 320, 87, 28);
+		contentPane.add(btnOk);
 
-				Contato cont = new Contato();
-				ContatoDAO dao = new ContatoDAO();
-
-				SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-
-				java.util.Date dataNasc;
-				java.sql.Date sqlDataNasc = null;
-
-				try {
-					dataNasc = sdfData.parse(textDataNasc.getText());
-					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
-				} catch (ParseException dateException) {
-
-				}
-
-				cont.setNome(textNome.getText());
-				cont.setLocalTrabalho(textLocalTrab.getText());
-				cont.setTelefone(textTelefone.getText());
-				cont.setEndereco(textEndereco.getText());
-				cont.setObservacao(textObservacao.getText());
-				cont.setDataNasc(sqlDataNasc);
-
-				dao.alteracaoContato(cont, contConsulta);
-
-				if (dao.isAlteracaoFeita() == true) {
-					JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!",
-							"Cadastro no Banco de Dados", JOptionPane.INFORMATION_MESSAGE);
-
-					dispose();
-					TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
-					tAC1.setVisible(true);
-					tAC1.setLocationRelativeTo(null);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
-							"Campos incorretos", JOptionPane.WARNING_MESSAGE);
-				}
-
-			}
-		});
-		btnIn.setBounds(380, 320, 87, 28);
-		contentPane.add(btnIn);
-
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				dispose();
-				TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
-				tAC1.setVisible(true);
-				tAC1.setLocationRelativeTo(null);
-			}
-		});
+		btnVoltar = new JButton("VOLTAR");
 		btnVoltar.setBounds(380, 355, 87, 28);
 		contentPane.add(btnVoltar);
 	}
+
+	public String getTextNome() {
+		return textNome.getText();
+	}
+
+	public String getTextLocalTrab() {
+		return textLocalTrab.getText();
+	}
+
+	public String getTextTelefone() {
+		return textTelefone.getText();
+	}
+
+	public String getTextEndereco() {
+		return textEndereco.getText();
+	}
+
+	public String getTextDataNasc() {
+		return textDataNasc.getText();
+	}
+
+	public String getTextObservacao() {
+		return textObservacao.getText();
+	}
+
+	public JButton getBtnOk() {
+		return btnOk;
+	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
+	}
+
 }

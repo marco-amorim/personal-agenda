@@ -2,8 +2,8 @@ package application;
 
 import java.awt.EventQueue;
 
+import controller.TelaMenuPrincipalController;
 import model.db.DB;
-import view.TelaMenuPrincipal;
 
 public class Principal {
 
@@ -24,9 +24,7 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaMenuPrincipal frame = new TelaMenuPrincipal();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
+					new TelaMenuPrincipalController();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

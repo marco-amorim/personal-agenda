@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,8 +17,8 @@ public class TelaListaContatos extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	Object[] row = new Object[6];
-	DefaultTableModel model;
+	private DefaultTableModel model;
+	private JButton btnVoltar;
 
 	public TelaListaContatos() {
 		setTitle("Lista de Contatos");
@@ -50,15 +48,7 @@ public class TelaListaContatos extends JFrame {
 		lblNewLabel_5.setBounds(0, 70, 846, 30);
 		contentPane.add(lblNewLabel_5);
 
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaMenuPrincipal tmp = new TelaMenuPrincipal();
-				tmp.setVisible(true);
-				tmp.setLocationRelativeTo(null);
-			}
-		});
+		btnVoltar = new JButton("VOLTAR");
 		btnVoltar.setBounds(730, 355, 87, 28);
 		contentPane.add(btnVoltar);
 
@@ -78,6 +68,10 @@ public class TelaListaContatos extends JFrame {
 
 	public DefaultTableModel getModel() {
 		return model;
+	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
 	}
 
 }

@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +13,11 @@ public class TelaCadastroContatos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JButton btnInclusao;
+	private JButton btnAlteracao;
+	private JButton btnConsulta;
+	private JButton btnExclusao;
+	private JButton btnRetornar;
 
 	public TelaCadastroContatos() {
 		setResizable(false);
@@ -44,65 +47,45 @@ public class TelaCadastroContatos extends JFrame {
 		lblCadastroDeContatos.setBounds(0, 70, 479, 30);
 		contentPane.add(lblCadastroDeContatos);
 
-		JButton btnNewButton_1 = new JButton("INCLUS\u00C3O");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
-				telaInclusaoContato.setVisible(true);
-				telaInclusaoContato.setLocationRelativeTo(null);
-			}
-		});
-		btnNewButton_1.setBounds(110, 130, 250, 30);
-		contentPane.add(btnNewButton_1);
+		btnInclusao = new JButton("INCLUS\u00C3O");
+		btnInclusao.setBounds(110, 130, 250, 30);
+		contentPane.add(btnInclusao);
 
-		JButton btnNewButton_2 = new JButton("ALTERA\u00C7\u00C3O");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
-				tAC1.setVisible(true);
-				tAC1.setLocationRelativeTo(null);
-			}
-		});
-		btnNewButton_2.setBounds(110, 170, 250, 30);
-		contentPane.add(btnNewButton_2);
+		btnAlteracao = new JButton("ALTERA\u00C7\u00C3O");
+		btnAlteracao.setBounds(110, 170, 250, 30);
+		contentPane.add(btnAlteracao);
 
-		JButton btnNewButton_3 = new JButton("CONSULTA");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaConsultaContato telaConsultaContato = new TelaConsultaContato();
-				telaConsultaContato.setVisible(true);
-				telaConsultaContato.setLocationRelativeTo(null);
-			}
-		});
-		btnNewButton_3.setBounds(110, 210, 250, 30);
-		contentPane.add(btnNewButton_3);
+		btnConsulta = new JButton("CONSULTA");
+		btnConsulta.setBounds(110, 210, 250, 30);
+		contentPane.add(btnConsulta);
 
-		JButton btnNewButton_4 = new JButton("EXCLUS\u00C3O");
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
-				telaExclusaoContato.setVisible(true);
-				telaExclusaoContato.setLocationRelativeTo(null);
-			}
-		});
-		btnNewButton_4.setBounds(110, 250, 250, 30);
-		contentPane.add(btnNewButton_4);
+		btnExclusao = new JButton("EXCLUS\u00C3O");
+		btnExclusao.setBounds(110, 250, 250, 30);
+		contentPane.add(btnExclusao);
 
-		JButton btnNewButton_5 = new JButton("RETORNAR");
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
-				telaMenuPrincipal.setVisible(true);
-				telaMenuPrincipal.setLocationRelativeTo(null);
-			}
-		});
-		btnNewButton_5.setBounds(110, 290, 250, 30);
-		contentPane.add(btnNewButton_5);
+		btnRetornar = new JButton("RETORNAR");
+		btnRetornar.setBounds(110, 290, 250, 30);
+		contentPane.add(btnRetornar);
+	}
+
+	public JButton getBtnInclusao() {
+		return btnInclusao;
+	}
+
+	public JButton getBtnAlteracao() {
+		return btnAlteracao;
+	}
+
+	public JButton getBtnConsulta() {
+		return btnConsulta;
+	}
+
+	public JButton getBtnExclusao() {
+		return btnExclusao;
+	}
+
+	public JButton getBtnRetornar() {
+		return btnRetornar;
 	}
 
 }

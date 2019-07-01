@@ -1,23 +1,14 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import model.dao.CompromissoDAO;
-import model.entities.Compromisso;
-
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class TelaAlteracaoCompromisso1 extends JFrame {
 
@@ -26,6 +17,8 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 	private JTextField textDataInicio;
 	private JTextField textHoraInicio;
 	private JTextField textHoraTermino;
+	private JButton btnOk;
+	private JButton btnVoltar;
 
 	public TelaAlteracaoCompromisso1() {
 		setResizable(false);
@@ -82,78 +75,33 @@ public class TelaAlteracaoCompromisso1 extends JFrame {
 		contentPane.add(textHoraTermino);
 		textHoraTermino.setColumns(10);
 
-		JButton btnIn = new JButton("OK");
-		btnIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnOk = new JButton("OK");
+		btnOk.setBounds(380, 320, 87, 28);
+		contentPane.add(btnOk);
 
-				Compromisso comp = new Compromisso();
-				CompromissoDAO dao = new CompromissoDAO();
-
-				SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-				SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
-
-				java.util.Date dataInicio;
-				java.util.Date horaInicio;
-				java.util.Date horaTermino;
-				java.sql.Date sqlDataInicio = null;
-				java.sql.Time sqlHoraInicio = null;
-				java.sql.Time sqlHoraTermino = null;
-
-				try {
-					dataInicio = sdfData.parse(textDataInicio.getText());
-					horaInicio = sdfHora.parse(textHoraInicio.getText());
-					horaTermino = sdfHora.parse(textHoraTermino.getText());
-					sqlDataInicio = new java.sql.Date(dataInicio.getTime());
-					sqlHoraInicio = new java.sql.Time(horaInicio.getTime());
-					sqlHoraTermino = new java.sql.Time(horaTermino.getTime());
-
-				} catch (ParseException dateException) {
-
-					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
-							"Campos incorretos", JOptionPane.WARNING_MESSAGE);
-
-				}
-
-				comp.setDataInicio(sqlDataInicio);
-				comp.setHoraInicio(sqlHoraInicio);
-				comp.setHoraTermino(sqlHoraTermino);
-
-				Compromisso compConsulta = new Compromisso();
-				compConsulta = dao.consultaAlteracaoCompromisso(comp);
-
-				if (dao.isExisteNoBanco() == true) {
-					dispose();
-					TelaAlteracaoCompromisso2 tAC2 = new TelaAlteracaoCompromisso2(compConsulta);
-					tAC2.setVisible(true);
-					tAC2.setLocationRelativeTo(null);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
-							JOptionPane.INFORMATION_MESSAGE);
-
-					dispose();
-					TelaAlteracaoCompromisso1 tAC1 = new TelaAlteracaoCompromisso1();
-					tAC1.setVisible(true);
-					tAC1.setLocationRelativeTo(null);
-				}
-
-			}
-		});
-		btnIn.setBounds(380, 320, 87, 28);
-		contentPane.add(btnIn);
-
-		JButton btnNewButton = new JButton("VOLTAR");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				dispose();
-				TelaCadastroCompromissos tCC = new TelaCadastroCompromissos();
-				tCC.setVisible(true);
-				tCC.setLocationRelativeTo(null);
-
-			}
-		});
-		btnNewButton.setBounds(380, 355, 87, 28);
-		contentPane.add(btnNewButton);
+		btnVoltar = new JButton("VOLTAR");
+		btnVoltar.setBounds(380, 355, 87, 28);
+		contentPane.add(btnVoltar);
 	}
+
+	public String getTextDataInicio() {
+		return textDataInicio.getText();
+	}
+
+	public String getTextHoraInicio() {
+		return textHoraInicio.getText();
+	}
+
+	public String getTextHoraTermino() {
+		return textHoraTermino.getText();
+	}
+
+	public JButton getBtnOk() {
+		return btnOk;
+	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
+	}
+
 }

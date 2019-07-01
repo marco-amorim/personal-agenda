@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +17,7 @@ public class TelaCompromissosDoDia extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private JButton btnVoltar;
 	Object[] row = new Object[6];
 	DefaultTableModel model;
 
@@ -50,15 +49,7 @@ public class TelaCompromissosDoDia extends JFrame {
 		lblNewLabel_5.setBounds(0, 70, 846, 30);
 		contentPane.add(lblNewLabel_5);
 
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaMenuPrincipal tmp = new TelaMenuPrincipal();
-				tmp.setVisible(true);
-				tmp.setLocationRelativeTo(null);
-			}
-		});
+		btnVoltar = new JButton("VOLTAR");
 		btnVoltar.setBounds(730, 355, 87, 28);
 		contentPane.add(btnVoltar);
 
@@ -69,7 +60,8 @@ public class TelaCompromissosDoDia extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		model = new DefaultTableModel();
-		Object[] columns = { "Data de Início", "Hora de Início", "Hora de Término", "Local", "Descrição", "Observação" };
+		Object[] columns = { "Data de Início", "Hora de Início", "Hora de Término", "Local", "Descrição",
+				"Observação" };
 		table.setModel(model);
 		table.setRowHeight(30);
 		model.setColumnIdentifiers(columns);
@@ -78,6 +70,10 @@ public class TelaCompromissosDoDia extends JFrame {
 
 	public DefaultTableModel getModel() {
 		return model;
+	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
 	}
 
 }

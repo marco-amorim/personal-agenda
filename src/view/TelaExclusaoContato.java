@@ -1,23 +1,14 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import model.dao.ContatoDAO;
-import model.entities.Contato;
-
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class TelaExclusaoContato extends JFrame {
 
@@ -25,6 +16,8 @@ public class TelaExclusaoContato extends JFrame {
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textDataNasc;
+	private JButton btnOk;
+	private JButton btnVoltar;
 
 	public TelaExclusaoContato() {
 		setResizable(false);
@@ -72,52 +65,29 @@ public class TelaExclusaoContato extends JFrame {
 		contentPane.add(textDataNasc);
 		textDataNasc.setColumns(10);
 
-		JButton btnIn = new JButton("OK");
-		btnIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnOk = new JButton("OK");
+		btnOk.setBounds(380, 320, 87, 28);
+		contentPane.add(btnOk);
 
-				Contato cont = new Contato();
-				ContatoDAO dao = new ContatoDAO();
-
-				SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
-
-				java.util.Date dataNasc;
-				java.sql.Date sqlDataNasc = null;
-
-				try {
-					dataNasc = sdfDataNasc.parse(textDataNasc.getText());
-					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
-				} catch (ParseException e1) {
-
-					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
-							"Campos incorretos", JOptionPane.WARNING_MESSAGE);
-				}
-
-				cont.setNome(textNome.getText());
-				cont.setDataNasc(sqlDataNasc);
-
-				dao.excluiContato(cont);
-
-				dispose();
-				TelaExclusaoContato telaExclusaoContato = new TelaExclusaoContato();
-				telaExclusaoContato.setVisible(true);
-				telaExclusaoContato.setLocationRelativeTo(null);
-
-			}
-		});
-		btnIn.setBounds(380, 320, 87, 28);
-		contentPane.add(btnIn);
-
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
-				telaCadastroContatos.setVisible(true);
-				telaCadastroContatos.setLocationRelativeTo(null);
-			}
-		});
+		btnVoltar = new JButton("VOLTAR");
 		btnVoltar.setBounds(380, 355, 87, 28);
 		contentPane.add(btnVoltar);
 	}
+
+	public String getTextNome() {
+		return textNome.getText();
+	}
+
+	public String getTextDataNasc() {
+		return textDataNasc.getText();
+	}
+
+	public JButton getBtnOk() {
+		return btnOk;
+	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
+	}
+
 }

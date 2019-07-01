@@ -1,22 +1,14 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import model.dao.ContatoDAO;
-import model.entities.Contato;
 
 public class TelaAlteracaoContato1 extends JFrame {
 
@@ -24,6 +16,8 @@ public class TelaAlteracaoContato1 extends JFrame {
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textDataNasc;
+	private JButton btnOk;
+	private JButton btnVoltar;
 
 	public TelaAlteracaoContato1() {
 		setResizable(false);
@@ -71,65 +65,29 @@ public class TelaAlteracaoContato1 extends JFrame {
 		contentPane.add(textDataNasc);
 		textDataNasc.setColumns(10);
 
-		JButton btnIn = new JButton("OK");
-		btnIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnOk = new JButton("OK");
+		btnOk.setBounds(380, 320, 87, 28);
+		contentPane.add(btnOk);
 
-				Contato cont = new Contato();
-				ContatoDAO dao = new ContatoDAO();
-
-				SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-
-				java.util.Date dataNasc;
-				java.sql.Date sqlDataNasc = null;
-
-				try {
-					dataNasc = sdfData.parse(textDataNasc.getText());
-					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
-				} catch (ParseException dateException) {
-
-					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos corretamente!",
-							"Campos incorretos", JOptionPane.WARNING_MESSAGE);
-
-				}
-
-				cont.setNome(textNome.getText());
-				cont.setDataNasc(sqlDataNasc);
-
-				Contato contConsulta = new Contato();
-				contConsulta = dao.consultaAlteracaoContato(cont);
-
-				if (dao.isExisteNoBanco() == true) {
-					dispose();
-					TelaAlteracaoContato2 tAC2 = new TelaAlteracaoContato2(contConsulta);
-					tAC2.setVisible(true);
-					tAC2.setLocationRelativeTo(null);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Dados inexistentes!", "Cadastro no Banco de Dados",
-							JOptionPane.INFORMATION_MESSAGE);
-
-					dispose();
-					TelaAlteracaoContato1 tAC1 = new TelaAlteracaoContato1();
-					tAC1.setVisible(true);
-					tAC1.setLocationRelativeTo(null);
-				}
-
-			}
-		});
-		btnIn.setBounds(380, 320, 87, 28);
-		contentPane.add(btnIn);
-
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
-				telaCadastroContatos.setVisible(true);
-				telaCadastroContatos.setLocationRelativeTo(null);
-			}
-		});
+		btnVoltar = new JButton("VOLTAR");
 		btnVoltar.setBounds(380, 355, 87, 28);
 		contentPane.add(btnVoltar);
 	}
+
+	public String getTextNome() {
+		return textNome.getText();
+	}
+
+	public String getTextDataNasc() {
+		return textDataNasc.getText();
+	}
+
+	public JButton getBtnOk() {
+		return btnOk;
+	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
+	}
+
 }

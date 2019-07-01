@@ -1,22 +1,14 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import model.dao.ContatoDAO;
-import model.entities.Contato;
-
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class TelaInclusaoContato extends JFrame {
 
@@ -28,6 +20,8 @@ public class TelaInclusaoContato extends JFrame {
 	private JTextField textEndereco;
 	private JTextField textDataNasc;
 	private JTextField textObservacao;
+	private JButton btnOk;
+	private JButton btnVoltar;
 
 	public TelaInclusaoContato() {
 		setResizable(false);
@@ -111,55 +105,45 @@ public class TelaInclusaoContato extends JFrame {
 		contentPane.add(textObservacao);
 		textObservacao.setColumns(10);
 
-		JButton btnIn = new JButton("OK");
-		btnIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnOk = new JButton("OK");
+		btnOk.setBounds(380, 320, 87, 28);
+		contentPane.add(btnOk);
 
-				Contato cont = new Contato();
-				ContatoDAO dao = new ContatoDAO();
-
-				SimpleDateFormat sdfDataNasc = new SimpleDateFormat("dd/MM/yyyy");
-
-				java.util.Date dataNasc;
-				java.sql.Date sqlDataNasc = null;
-
-				try {
-					dataNasc = sdfDataNasc.parse(textDataNasc.getText());
-					sqlDataNasc = new java.sql.Date(dataNasc.getTime());
-				} catch (ParseException e1) {
-
-				}
-
-				cont.setNome(textNome.getText());
-				cont.setLocalTrabalho(textLocalTrab.getText());
-				cont.setTelefone(textTelefone.getText());
-				cont.setEndereco(textEndereco.getText());
-				cont.setObservacao(textObservacao.getText());
-				cont.setDataNasc(sqlDataNasc);
-
-				dao.incluiContato(cont);
-
-				dispose();
-				TelaInclusaoContato telaInclusaoContato = new TelaInclusaoContato();
-				telaInclusaoContato.setVisible(true);
-				telaInclusaoContato.setLocationRelativeTo(null);
-
-			}
-		});
-		btnIn.setBounds(380, 320, 87, 28);
-		contentPane.add(btnIn);
-
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaCadastroContatos telaCadastroContatos = new TelaCadastroContatos();
-				telaCadastroContatos.setVisible(true);
-				telaCadastroContatos.setLocationRelativeTo(null);
-
-			}
-		});
+		btnVoltar = new JButton("VOLTAR");
 		btnVoltar.setBounds(380, 355, 87, 28);
 		contentPane.add(btnVoltar);
 	}
+
+	public JButton getBtnOk() {
+		return btnOk;
+	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
+	}
+
+	public String getTextNome() {
+		return textNome.getText();
+	}
+
+	public String getTextLocalTrab() {
+		return textLocalTrab.getText();
+	}
+
+	public String getTextTelefone() {
+		return textTelefone.getText();
+	}
+
+	public String getTextEndereco() {
+		return textEndereco.getText();
+	}
+
+	public String getTextDataNasc() {
+		return textDataNasc.getText();
+	}
+
+	public String getTextObservacao() {
+		return textObservacao.getText();
+	}
+
 }
