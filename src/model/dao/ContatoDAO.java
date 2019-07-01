@@ -31,7 +31,7 @@ public class ContatoDAO {
 		}
 		try {
 			PreparedStatement st = null;
-			st = conn.prepareStatement("INSERT INTO contato (nome, localtrab, telefone, endereco, observacao, datanasc)"
+			st = conn.prepareStatement("INSERT INTO contato (nome, localTrab, telefone, endereco, observacao, dataNasc)"
 					+ "VALUES(?, ?, ?, ?, ?, ?)");
 
 			st.setString(1, cont.getNome());
