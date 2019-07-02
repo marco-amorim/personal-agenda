@@ -14,7 +14,7 @@ public class TelaAlteracaoContato2Controller {
 	TelaAlteracaoContato2 tac2;
 
 	public TelaAlteracaoContato2Controller(Contato contConsulta) {
-		tac2 = new TelaAlteracaoContato2(contConsulta);
+		tac2 = new TelaAlteracaoContato2();
 		tac2.setVisible(true);
 		tac2.setLocationRelativeTo(null);
 		botaoOk(contConsulta);

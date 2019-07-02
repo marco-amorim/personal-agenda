@@ -10,8 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import model.entities.Compromisso;
-
 public class TelaAlteracaoCompromisso2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +23,7 @@ public class TelaAlteracaoCompromisso2 extends JFrame {
 	private JButton btnOk;
 	private JButton btnVoltar;
 
-	public TelaAlteracaoCompromisso2(Compromisso compConsulta) {
+	public TelaAlteracaoCompromisso2() {
 		setResizable(false);
 		setTitle("Altera\u00E7\u00E3o de Compromisso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

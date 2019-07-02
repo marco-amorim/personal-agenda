@@ -14,7 +14,7 @@ public class TelaAlteracaoCompromisso2Controller {
 	TelaAlteracaoCompromisso2 tac2;
 
 	public TelaAlteracaoCompromisso2Controller(Compromisso compConsulta) {
-		tac2 = new TelaAlteracaoCompromisso2(compConsulta);
+		tac2 = new TelaAlteracaoCompromisso2();
 		tac2.setVisible(true);
 		tac2.setLocationRelativeTo(null);
 		botaoOk(compConsulta);

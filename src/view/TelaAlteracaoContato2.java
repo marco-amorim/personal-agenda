@@ -10,8 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import model.entities.Contato;
-
 public class TelaAlteracaoContato2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +23,7 @@ public class TelaAlteracaoContato2 extends JFrame {
 	private JButton btnOk;
 	private JButton btnVoltar;
 
-	public TelaAlteracaoContato2(Contato contConsulta) {
+	public TelaAlteracaoContato2() {
 		setResizable(false);
 		setTitle("Altera\u00E7\u00E3o de Contato");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
