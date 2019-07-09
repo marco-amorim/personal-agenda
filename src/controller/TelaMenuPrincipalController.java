@@ -1,5 +1,6 @@
 package controller;
 
+import model.db.DB;
 import view.TelaMenuPrincipal;
 
 public class TelaMenuPrincipalController {
@@ -58,6 +59,8 @@ public class TelaMenuPrincipalController {
 	public void botaoFinalizar() {
 		tmp.getBtnFinalizar().addActionListener(e -> {
 			tmp.dispose();
+			DB.closeConnection();
+			System.out.println("Conexão com o banco fechada!");
 		});
 	}
 
